@@ -1,0 +1,15 @@
+.toast{
+  height: 5rem;
+  align-items: center;
+  text-align: center;
+  font-weight: 600;
+  font-size: large;
+
+  @media screen and (min-width: 1000px) {
+    width:600px;
+  }
+
+  @media screen and (max-width: 1000px) {
+    width:300px;
+  }
+}

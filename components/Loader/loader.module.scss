@@ -1,0 +1,43 @@
+
+
+.loader{
+
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  gap: 1rem;
+  @media screen and (min-width: 1000px){
+    width: 80%;
+    padding: 0.8rem;
+  }
+
+  @media screen and (max-width: 1000px){
+    width: 90%;
+    padding: 0.5rem;
+  }
+  height: 12rem;
+  background: rgba(225, 222, 222, 0.708);
+  border-radius: 0.4em;
+  margin-bottom: 0.2rem;
+  justify-content: center;
+  align-items: center;
+
+    .loadingImageWrapper{
+      margin: 0 auto;
+      animation: rotation 1s infinite linear;
+    }
+
+    @keyframes rotation {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(359deg);
+      }
+    }
+
+    p{
+      font-weight: 600;
+    }
+
+}

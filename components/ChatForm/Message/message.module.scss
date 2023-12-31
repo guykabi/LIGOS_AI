@@ -1,0 +1,91 @@
+@import '../../../public//assets/styles/variables.module.scss';
+
+.userMessage{
+
+  @media screen and (max-width: 1000px){
+  
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    min-width: 5rem;
+    height: max-content;
+    padding: 1.2rem;
+    align-items: center;
+    box-shadow:$shadow;
+    border-radius: 0.4em;
+    gap: 1rem;
+  }
+
+  @media screen and (min-width: 1000px){
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    // margin: auto;
+    height: max-content;
+    min-height: 5rem;
+    padding: 1.2rem;
+    align-items: center;
+    box-shadow:$shadow;
+    border-radius: 0.4em;
+    gap: 1rem;
+  }
+
+  .senderIcon{
+    height: fit-content;
+  }
+
+  .content{
+    width: 90%;
+    word-wrap: break-word;
+    text-align: left;
+  }
+
+}
+
+.message{
+
+  @media screen and (max-width: 1000px){
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    min-width: 5rem;
+    height: fit-content;
+    padding: 1.2rem;
+    align-items: center;
+    background: rgba(225, 222, 222, 0.708);
+    box-shadow:$shadow;
+    border-radius: 0.4em;
+    gap: 1rem;
+
+  }
+
+  @media screen and (min-width: 1000px){
+    display: flex;
+    flex-direction: row;
+    width:100%;
+    // margin: auto;
+    height: max-content;
+    // min-height: 5rem;
+    padding: 1.2rem;
+    align-items: center;
+    background: rgba(225, 222, 222, 0.708);
+    box-shadow:$shadow;
+    border-radius: 0.4em;
+    gap: 1rem;
+
+  }
+
+  .senderIcon{
+    height: fit-content;
+  }
+ 
+
+  .content{
+    width:90%;
+    word-wrap: break-word;
+    text-align: left;
+  }
+
+
+}

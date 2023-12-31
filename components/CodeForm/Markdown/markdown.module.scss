@@ -1,0 +1,33 @@
+
+.markdown{
+ overflow: scroll;
+ 
+  .pre{
+    overflow: auto;
+    border-radius: 0.4em;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: fit-content;
+    max-width: 80%;
+    background-color:lightgrey;
+    padding: 5px;
+  }
+
+  .code{
+    display: flex;
+    background-color:lightgrey;
+    // overflow: scroll;
+    width: fit-content;
+    // max-width: 80%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 0.4em;
+    padding: 10px;
+    align-items: center;
+  }
+
+}
+
+.markdown::-webkit-scrollbar{
+  display: none;
+}

@@ -1,0 +1,107 @@
+@import '../../public/assets/styles/variables.module.scss';
+
+@media screen and (min-width: 868px) {
+  
+.sidebar{
+  position: relative;
+  margin: 0 auto;
+  width: 20%;
+  min-width: 18rem;
+  height: 100%;
+  color: white;
+  background-color: $primary-background;
+  padding: 2px; 
+
+  .innersidebar{
+    position: relative;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    height: 100%;
+    
+
+  .link{
+    position: relative;
+    align-items: center;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+
+  .logoWrapper{
+    position: relative;
+    width: 30px;
+    height: 30px;
+    margin-right: 4px;
+   }
+   
+  }
+  
+ 
+ .routesWrapper{
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+
+   .routeLink{
+    width: 100%;
+    justify-content:flex-start;
+    border-radius: 0.4em;
+    padding: 10px;
+    cursor: pointer;
+    transition: 0.4s;
+
+    .routeLabel{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+      font-weight: 500;
+    }
+
+   }
+
+   .routeLink:hover{
+    background-color: rgba(255, 255, 255, 0.368);
+   }
+
+
+   .routerLinkActive{
+    width: 100%;
+    justify-content:flex-start;
+    border-radius: 0.4em;
+    padding: 10px;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.368);
+
+    .routeLabel{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+      font-weight: 500;
+    }
+   }
+
+  }
+
+  .score{
+    position: absolute;
+    bottom: 0;
+    margin: 0px 0px 30px 10px;
+    font-weight: 600;
+  }
+ }
+
+ }
+
+}
+
+@media screen and (max-width: 868px) {
+  .sidebar{
+    display: none;
+  }
+}

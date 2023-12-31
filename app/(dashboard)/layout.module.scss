@@ -1,0 +1,57 @@
+@import '../../public/assets/styles/variables.module.scss';
+
+
+
+@media screen and (max-width: 1000px) {
+
+  .maindashboard{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+ 
+  .contentwrapper{
+    position: relative;
+    width: 90%;
+    height: 100%;
+    margin:auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    // justify-content: center;
+  }
+ }
+}
+
+
+@media screen and (min-width: 1000px) {
+
+.maindashboard{
+  position: relative;
+  display: flex;
+  flex-direction:row;
+  height: 100vh;
+  width: 100%;
+
+  .contentwrapper{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+ }
+}
+
+
+
+
+
+

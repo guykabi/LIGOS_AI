@@ -1,0 +1,48 @@
+@import '../../public/assets/styles/variables.module.scss';
+.cardMainWrapper{
+  margin: auto;
+  width: 320px;
+  min-width: 200px;
+  max-width: 400px;
+  
+  @media screen and (max-width: 1000px) {
+    height: 125px;
+  } 
+
+  @media screen and (min-width: 1000px) {
+    height: 150px;
+  }
+
+  padding: 1rem;
+  font-weight: 500;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 0.4em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  transition: 0.4s;
+
+  .innerCard{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    gap: 15px;
+    width: 70%;
+  }
+
+  .iconWrapper{
+     width: 30%;
+     align-items: center;
+     text-align: center;
+     cursor: pointer;
+     transition: 0.4s;
+  }
+
+  .iconWrapper:hover{
+   opacity: 0.5;
+  }
+}
+
+.cardMainWrapper:hover{
+  box-shadow: rgba(100, 100, 111, 0.522) 0px 7px 29px 0px;
+}

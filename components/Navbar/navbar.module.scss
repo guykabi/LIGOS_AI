@@ -1,0 +1,41 @@
+@import '../../public/assets/styles/variables.module.scss';
+
+.navbar{
+  position: relative;
+  top: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  color: black;
+  border-bottom: 1px solid rgb(190, 185, 185);
+
+  @media screen and (min-width: 868px) {
+    height: 4rem;
+    max-height: 4rem;
+  }
+  @media screen and (max-width: 868px) {
+    height: 2.5rem;
+    max-height: 2.5rem;
+  }
+
+  .userDetails{
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .signoutbtn{
+    width: fit-content;
+    padding-right: 10px;
+    cursor: pointer;
+    transition: 0.4s;
+  }
+
+  .signoutbtn:hover{
+    color: rgba(0, 0, 0, 0.555);
+  }
+}

@@ -1,0 +1,19 @@
+$primary-background: rgb(75, 75, 159);
+$secondary-background:  linear-gradient(225deg, #5f92e3ca 2%, #779ede75 20%, #2b85c551 22%);
+$small:768px;
+$shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+$shadow-hover: rgba(100, 100, 111, 0.522) 0px 7px 29px 0px;
+$hover-black: rgba(0, 0, 0, 0.555);
+$hover-white: rgba(255, 255, 255, 0.543);
+
+
+ 
+:export {
+  primaryColor: $primary-background;
+  secondaryColor: $secondary-background;
+  mobile: $small;
+  boxShadow:$shadow;
+  box-shadow-hover:$shadow-hover;
+  hover-black:$hover-black;
+  hover-white:$hover-white
+}
