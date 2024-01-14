@@ -6,11 +6,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { routes } from "./constants";
 import { usePathname } from "next/navigation";
-import { FaArrowLeft } from "react-icons/fa";
+import FreeCounter from "../FreeCounter/freeCounter";
 
+type SideBarProps = {
+  freeUses:number
+}
 
-
-function Sidebar() {
+function Sidebar({freeUses}:SideBarProps) {
   const pathname = usePathname();
 
   return (
@@ -42,8 +44,8 @@ function Sidebar() {
             </Link>
           ))}
         </div>
-        <div className={styles.score}>
-          <p>Free uses : 5</p>
+        <div className={styles.freeUses}>
+          <FreeCounter counter={freeUses}/>
         </div>
       </div>
     </div>

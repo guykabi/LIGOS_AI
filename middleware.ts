@@ -6,5 +6,6 @@ export const config = { matcher: [
   '/videoGeneration',
   '/imageGeneration',
   '/musicGeneration',
-  '/codeGeneration'
+  '/codeGeneration',
+  '/settings'
 ]}

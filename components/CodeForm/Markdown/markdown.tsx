@@ -1,4 +1,5 @@
-'use client'
+// 'use client'
+
 import React from 'react'
 import  styles from './markdown.module.scss'
 import ReactMarkdown from 'react-markdown'

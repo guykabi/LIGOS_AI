@@ -46,7 +46,7 @@ if (useSession().data?.user) {
          <p>With &nbsp;<span>LIGOS AI</span></p>
          <div className={styles.signupbtn}>
          <Link href='/register'>
-          <Button icon={<FaArrowRight />} text='Register' theme='white'/>
+          <Button icon={<FaArrowRight />} text='Register' theme='white' height={4} width={50}/>
          </Link>
         </div>
         </div>

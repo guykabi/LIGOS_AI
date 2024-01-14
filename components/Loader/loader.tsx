@@ -2,7 +2,11 @@ import React from 'react'
 import Image from 'next/image'
 import styles from './loader.module.scss'
 
-const Loader = () => {
+type LoaderProps = {
+  text?:string
+}
+
+const Loader = ({text = 'Loading...'}:LoaderProps) => {
   return (
     <div className={styles.loader}>
       <div className={styles.loadingImageWrapper}>
@@ -14,7 +18,7 @@ const Loader = () => {
         />
       </div>
       <p>
-        Ligos is loading...
+        {text}
       </p>
     </div>
   )

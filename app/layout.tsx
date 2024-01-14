@@ -5,8 +5,9 @@ import { Inter, Montserrat } from 'next/font/google'
 import AuthProvider from '../components/authProvider'
 import { getServerSession } from 'next-auth/next'
 import { authOptions } from './api/auth/[...nextauth]/options'
-import ReactQueryProvider from '@/utils/reactQuery'
-import ToastifyProvider from '@/utils/Toastify/toastifyProvider'
+import ReactQueryProvider from '@/providers/reactQueryProvider'
+import ToastifyProvider from '@/providers/Toastify/toastifyProvider'
+import Head from 'next/head'
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -18,8 +19,8 @@ const montserrat = Montserrat({
 })
 
 export const metadata: Metadata = {
-  title: 'Ligos AI',
-  description: 'Multiple AI services in one place',
+  title: 'LIGOS AI',
+  description: 'Multiple AI services in one place'
 }
 
 export default async function RootLayout({
@@ -33,10 +34,13 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className={`${montserrat.variable}`}>
+      <Head>
+       <link href="/AI_LOGO.png" rel={"icon"} sizes="any" />
+      </Head>
       <AuthProvider session={session}>
         <ReactQueryProvider>
           <body className={inter.className}>
-           <ToastifyProvider>
+           <ToastifyProvider> 
             {children}
            </ToastifyProvider>
           </body>

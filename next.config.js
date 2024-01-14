@@ -10,6 +10,8 @@ const nextConfig = {
         hostname: "**",
       },
     ],
+    domains: ["**"],
+    formats: ['image/avif', 'image/webp'],
   },
 }
 

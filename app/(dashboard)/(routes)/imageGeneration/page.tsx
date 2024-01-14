@@ -4,6 +4,7 @@ import styles from './imageGeneration.module.scss'
 import Header from '@/components/Header/header'
 import { IoImagesOutline} from 'react-icons/io5'
 import { Cards } from '@/components/Card/constants'
+import ImageForm from '@/components/ImageForm/imageForm'
 
 const ImageGenerator = () => {
 
@@ -17,6 +18,7 @@ const ImageGenerator = () => {
       icon={<IoImagesOutline size={30}/>}
       color={imageCard?.color}
       />
+      <ImageForm/>
     </div>
   )
 }

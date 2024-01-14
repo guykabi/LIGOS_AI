@@ -10,7 +10,7 @@ import Markdown from '@/components/CodeForm/Markdown/markdown';
 
 type MessageProps = {
   content: string;
-  role: string;
+  role?: 'system' | 'user';
 };
 
 const Message = ({ content, role }: MessageProps) => {
@@ -24,7 +24,7 @@ const Message = ({ content, role }: MessageProps) => {
           <div className={styles.senderIcon}>
             {session?.user?.image ? (
               <Image
-                alt='User Image'
+                alt='image'
                 src={session?.user?.image}
                 width={20}
                 height={20}

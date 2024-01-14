@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import {useRouter} from 'next/navigation'
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormSchemaType, MessageModel } from "@/utils/types";
 import { formSchema } from "@/utils/zod/schemas";
@@ -10,36 +11,31 @@ import styles from "./codeForm.module.scss";
 import Empty from "../Empty/empty";
 import Loader from "../Loader/loader";
 import Message from "../ChatForm/Message/message";
-import { sendCodeMessage } from "@/app/(dashboard)/actions";
-import { useMutation } from "react-query";
 import { ErrorHandler } from "../../utils/errorHandler";
 import { SpinnerLoader } from "../SpinnerLoader.tsx/spinnerLoader";
+import { useSendCode } from "@/hooks/useSendCode";
 
 const allMessages: MessageModel[] = [
-  { id: 1, content: "efgegegergegegeg efkgneofgog efjon", role: "user" },
+  { content: "efgegegergegegeg efkgneofgog efjon", role: "user" },
   {
-    id: 2,
     content:
-      "Here is an example: ```jsx import Markdown from '@/components/CodeForm/Markdown/markdown'; type MessageProps = {content: string;role: string;}; const Message = ({ content, role }: MessageProps) => {const { data: session } = useSession(); const pathname = usePathname(); return ( <> <div className={role === 'user' ? styles.userMessage : styles.message}> {role === 'user' ? ( <p> {session?.user?.image ? ( <Image alt='User Image' src={session?.user?.image} width={20} height={20} style={{ borderRadius: '50%' }}/> ) : (  <RxAvatar size={20} /> )} </p> ) : (  <p>  <Image width={20} height={20} alt='Ligos' src='/images/AI_LOGO.png'/> </p> )} <div className={styles.content}> {pathname.startsWith('/codeGeneration') ? (  <Markdown content={content} /> ) : (   <>{content}</> )} </div> </div> </> ); }; export default Message; ``` So got it ? `useState` than",
+      "Here is an example: ```jsx import Markdown from '@/components/CodeForm/Markdown/markdown'; type MessageProps = {content: string;role: string;}; const Message = ({ content, role }: MessageProps) => {const { data: session } = useSession(); const pathname = usePathname(); return ( <> <div className={role === 'user' ? styles.userMessage : styles.message}> {role === 'user' ? ( <p> {session?.user?.image ? ( <Image alt='User Image' src={session?.user?.image} 20} height={20} style={{ borderRadius: '50%' }}/> ) : (  <RxAvatar size={20} /> )} </p> ) : (  <p>  <Image 20} height={20} alt='Ligos' src='/images/AI_LOGO.png'/> </p> )} <div className={styles.content}> {pathname.startsWith('/codeGeneration') ? (  <Markdown content={content} /> ) : (   <>{content}</> )} </div> </div> </> ); }; export default Message; ``` So got it ? `useState` than",
     role: "system",
   },
-  { id: 3, content: "ecnejfvnnceojofrc4h4urf4rvv4urv4r", role: "user" },
+  { content: "ecnejfvnnceojofrc4h4urf4rvv4urv4r", role: "user" },
   {
-    id: 4,
     content:
       "ecnejfvnnceojofrc4h4urf4rvv4urv4r,ejfbbrff   f3jbibribf 3rijvb3irvrvbvbrvbin  3jovj3nrivn 3rjvn3rvirivbirbvbribv j3brvjibr",
     role: "system",
   },
-  { id: 5, content: "ecnejfvnnceojofrc4h4urf4rvv4urv4r", role: "user" },
+  { content: "ecnejfvnnceojofrc4h4urf4rvv4urv4r", role: "user" },
   {
-    id: 6,
     content:
       "ecnejfvnnceojofrc4h4urf4rvv4urv4r,ejfbbrff   f3jbibribf 3rijvb3irvrvbvbrvbin  3jovj3nrivn 3rjvn3rvirivbirbvbribv j3brvjibr",
     role: "system",
   },
-  { id: 7, content: "ecnejfvnnceojofrc4h4urf4rvv4urv4r", role: "user" },
+  { content: "ecnejfvnnceojofrc4h4urf4rvv4urv4r", role: "user" },
   {
-    id: 8,
     content:
       "ecnejfvnnceojofrc4h4urf4rvv4urv4r,ejfbbrff   f3jbibribf 3rijvb3irvrvbvbrvbin  3jovj3nrivn 3rjvn3rvirivbirbvbribv j3brvjibr",
     role: "system",
@@ -48,28 +44,21 @@ const allMessages: MessageModel[] = [
 
 const CodeForm = () => {
   const [messages, setMessages] = useState<MessageModel[]>(allMessages);
+  const {refresh} = useRouter()
 
   const {
-    mutate: sendMsg,
+    mutate: sendCode,
+    data: newMessage,
     isLoading,
     error,
-  } = useMutation(sendCodeMessage, {
-    onSuccess: (data) => {
-      let userMessage: MessageModel = {
-        role: "user",
-        content: getValues("content"),
-      };
-      setMessages([...messages, userMessage, data]);
-      reset();
-    },
-  });
+    isSuccess
+  } = useSendCode();
 
   const {
     register,
     handleSubmit,
     watch,
     getValues,
-    formState: { errors, isSubmitting },
     reset,
   } = useForm<FormSchemaType>({
     resolver: zodResolver(formSchema),
@@ -78,20 +67,53 @@ const CodeForm = () => {
   const handleMessage = async (message: FormSchemaType) => {
     const newMessage: MessageModel = {
       role: "user",
-      content: message.content,
+      content: message.content
     };
 
     const newMessages = [...messages, newMessage];
-
-    sendMsg(newMessages);
+    reset()
+    sendCode(newMessages);
   };
 
-  if (error) {
-    ErrorHandler(error);
-  }
+  
+  const messageContainer = (
+    <div className={styles.messages}>
+      {isLoading ? <Loader text="Ligos is loading..." /> : null}
+      {messages?.length === 0 && !isLoading ? (
+        <Empty message="No messages yet..." />
+      ) : null}
+      {!isLoading && messages?.length
+        ? messages.map((message, index) => (
+            <Message
+              key={index}
+              content={message.content}
+              role={message.role}
+            />
+          ))
+        : null}
+    </div>
+  );
 
+  useEffect(()=>{
+
+    if (!newMessage) return
+      let userMessage: MessageModel = {
+        role: "user",
+        content: getValues("content"),
+      };
+      setMessages([...messages, userMessage, newMessage]);
+      refresh()
+  },[isSuccess])
+
+
+  useEffect(()=>{
+    if (!error) return 
+      ErrorHandler(error);
+  },[error])
+
+  
   return (
-    <div className={styles.chatFormWrapper}>
+    <div className={styles.codeFormWrapper}>
       <form className={styles.form} onSubmit={handleSubmit(handleMessage)}>
         <div className={styles.inputWrapper}>
           <input
@@ -108,7 +130,7 @@ const CodeForm = () => {
               disabled={isLoading || !watch("content")}
               style={{ color: watch("content") ? "black" : "lightgray" }}
             >
-              {isLoading ? <SpinnerLoader size={10} color="gray"/> : "Send"}
+              {isLoading ? <SpinnerLoader size={10} color="gray" /> : "Send"}
             </button>
           </div>
         </div>
@@ -118,25 +140,12 @@ const CodeForm = () => {
             text={isLoading ? "Loading..." : "Send"}
             theme="black"
             type="submit"
+            width={70}
             height={4}
           />
         </div>
       </form>
-      {isLoading ? <Loader /> : null}
-      <div className={styles.messages}>
-        {messages?.length === 0 && !isLoading ? (
-          <Empty message="No messages yet..." />
-        ) : null}
-        {!isLoading && messages?.length
-          ? messages.map((message) => (
-              <Message
-                key={message.id}
-                content={message.content}
-                role={message.role}
-              />
-            ))
-          : null}
-      </div>
+      {messageContainer}
     </div>
   );
 };

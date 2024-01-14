@@ -40,7 +40,7 @@ const Button = ({
 
   <button  
   className={styles[theme]}
-  style={{height:`${height}rem`}}
+  style={{height:`${height}rem`, width:`${width}%`}}
   disabled={disabled}
   onClick={onClick}
   type={type}
@@ -48,8 +48,7 @@ const Button = ({
   aria-label={ariaLable}
   >
     {pending ? 'wait...' :text}
-    
-    {icon?<p>{icon}</p>:null}
+    {icon?<div className={styles.icon}>{icon}</div>:null}
   </button>
   )
 }

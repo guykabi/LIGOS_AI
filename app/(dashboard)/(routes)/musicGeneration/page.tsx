@@ -4,6 +4,7 @@ import styles from './music.module.scss'
 import { Cards } from '@/components/Card/constants'
 import { FiMusic } from "react-icons/fi";
 import Header from '@/components/Header/header';
+import MusicForm from '@/components/MusicForm/musicForm';
 
 
 const Music = () => {
@@ -18,6 +19,7 @@ const Music = () => {
       icon={<FiMusic size={30}/>}
       color={musicCard?.color}
       />
+      <MusicForm/>
     </div>
   )
 }

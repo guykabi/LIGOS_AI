@@ -1,27 +1,30 @@
-"use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styles from "./layout.module.scss";
 import Sidebar from "@/components/Sidebar/sidebar";
-import { usePathname } from "next/navigation";
 import { Navbar } from "@/components/Navbar/navbar";
 import SidebarMobile from "@/components/SidebarMobile/sidebarMobile";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../api/auth/[...nextauth]/options";
+import { checkApiLimitCount } from "../api/libs/apiLimit";
 
 
-function Layout({ children }: { children: React.ReactNode }) {
+async function DashboardLayout({ children }: { children: React.ReactNode }) {
 
+  const session = await getServerSession(authOptions)
+
+  const freeUsesCount = await checkApiLimitCount(session.user.id)
   
-
   return (
     <div className={styles.maindashboard}>
-        <Sidebar/>
+        <Sidebar freeUses={freeUsesCount}/>
         <SidebarMobile/>
       <main className={styles.contentwrapper}>
-        <Navbar />
+        <Navbar freeUses={freeUsesCount} />
         {children}
       </main>
     </div>
   );
 }
 
-export default Layout;
+export default DashboardLayout;
