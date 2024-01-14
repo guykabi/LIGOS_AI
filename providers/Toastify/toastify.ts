@@ -1,5 +1,5 @@
 import {toast } from "react-toastify"
-import {Toastify} from '../types'
+import {Toastify} from '../../utils/types'
 import styles from './toastify.module.scss'
 
 

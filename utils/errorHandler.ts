@@ -1,7 +1,7 @@
 'use client'
 
 import { isAxiosError } from "axios"
-import { handleToast } from "./Toastify/toastify"
+import { handleToast } from "../providers/Toastify/toastify"
 
 export const ErrorHandler = (error: any) => {
 
@@ -9,6 +9,10 @@ export const ErrorHandler = (error: any) => {
     
     if (error.response?.status! < 500) {
       
+    //  if(error.response?.status === 403){
+    //    //return Premium modal
+    //  }
+
       handleToast({
         type: 'error',
         text: error?.response?.data.message ?
