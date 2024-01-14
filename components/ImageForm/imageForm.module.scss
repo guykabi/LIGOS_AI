@@ -1,9 +1,12 @@
-.codeFormWrapper{ 
+.imageFormWrapper{ 
+  position: relative;
   height: 100%;
   width: 100%;
   display: flex;
   margin: auto;
   flex-direction: column;
+  //  align-items: center;
+  //  justify-content: center;
   padding-left: 0.5rem;
   padding-right: 0.5rem;
   gap:15px;
@@ -14,7 +17,7 @@
 
    .form{
      
-     @media screen and (max-width: 1000px) {
+     @media screen and (max-width: 1360px) {
        width: 90%;
        margin:0 auto;
        display: flex;
@@ -22,12 +25,12 @@
        justify-content: center;
        align-items: center;
        border-radius: 0.4em;
-       gap: 0.4rem;
+       gap: 1.4rem;
        border: 1px solid lightgray;
        padding: 0.7rem;
      }
 
-     @media screen and (min-width: 1000px) {
+     @media screen and (min-width: 1360px) {
        width: 80%;
        margin: 0 auto;
        display: flex;
@@ -35,52 +38,44 @@
        justify-content: center;
        align-items: center;
        border-radius: 0.4em;
-       gap: 2rem;
+       gap: 1rem;
        border: 1px solid lightgray;
        padding: 1rem;
      }
 
      .inputWrapper{
 
-       width: 100%;
        margin: auto;
        display: flex;
-       flex-direction: row;
        justify-content: center;
        align-items: center;
        gap: 0.5rem;
        border-radius: 0.4em;
        background-color: rgba(245, 245, 245, 0.774);
-
        
-       @media screen and (min-width: 1000px) {
+       
+       @media screen and (min-width: 1360px) {
+         width: 60%;
          height: 4rem;
          .btnWrapperMobile{
            display: none;
-         }
-
-         input{
-          width: 90%;
-          height: 3rem;
-          border: none;
-          outline: none;
-          font-size: large;
-          background: none;
+          }
         }
-       }
-
-       @media screen and (max-width: 1000px) {
+        
+        @media screen and (max-width: 1360px) {
+         width: 100%;
          height: 3.5rem;
          padding: 0.4rem;
+         flex-direction: row;
+         gap: 0.2rem;
+         
          input::placeholder{
            font-size: medium;
          }
 
          .btnWrapperMobile{
            width: 15%;
-           display: flex;
-           justify-content: center;
-           align-items: center;
+           justify-content: flex-end;
            button{
              background-color: transparent;
              border: none;
@@ -88,50 +83,75 @@
              cursor: pointer;
            }
          }
+       }
 
-         input{
-          width: 100%;
-          height: 3rem;
-          border: none;
-          outline: none;
-          font-size: medium;
-          background: none;
-        }
+       input{
+         width: 90%;
+         height: 3rem;
+         border: none;
+         outline: none;
+         font-size: large;
+         background: none;
+       }
+     }
+
+     .selectsWrapper{
+      @media screen and (min-width: 1360px){
+        margin: auto;
+        width: 25%;
+        display: flex;
+        flex-direction: row;
+        gap: 0.5rem;
+       } 
+
+       @media screen and (max-width: 1360px){
+        width: 100%;
+        margin: auto;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 1.5rem;
        }
      }
 
      .btnWrapper{
-       @media screen and (min-width: 1000px){
+       @media screen and (min-width: 1360px){
         margin: auto;
-        width: 30%;
+        width: 20%;
        } 
 
-       @media screen and (max-width: 1000px){
+       @media screen and (max-width: 1360px){
          display: none;
        }
      }
      
    }
 
-   .messages{
+   .images{
 
-     @media screen and (max-width: 1000px){
+     @media screen and (max-width: 1200px){
        position: relative;
-       display: flex;
-       flex-direction:column-reverse;
-       align-items: center;
+       display: grid;
+       grid-template-columns: repeat(2, 1fr);
+       
+       @media screen and (max-width: 660px){
+         grid-template-columns: repeat(1, 1fr);
+       }
+
+       grid-gap: 1.5rem;
        height: 80%;
        width: 90%;
-       gap: 1rem;
        margin:0 auto;
        padding: 0.5rem;
        overflow: scroll;
      }
 
-     @media screen and (min-width: 1000px){
+     @media screen and (min-width: 1200px){
        position: relative;
-       display: flex;
-       flex-direction: column-reverse;
+       display: grid;
+       grid-template-columns: repeat(3, 1fr);
+       grid-gap: 1.5rem;
        height: 80%;
        width: 80%;
        gap: 1.5rem;
@@ -142,7 +162,17 @@
      }
    }
 
-   .messages::-webkit-scrollbar{
+   .images::-webkit-scrollbar{
      display: none;
+   }
+
+   .imagesEmptyComponent{
+    width: 80%;
+    height:fit-content;
+    position:relative;
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    margin:auto;
    }
  }

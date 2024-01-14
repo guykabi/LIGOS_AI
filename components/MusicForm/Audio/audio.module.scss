@@ -1,0 +1,51 @@
+@import "../../../public/assets/styles/variables.module.scss";
+
+.audioWrapper {
+  display: flex;
+  flex-direction: row;
+
+  @media screen and (min-width: 1000px) {
+    width: 100%;
+    min-height: 5rem;
+    padding: 1.2rem;
+    gap: 1rem;
+  }
+
+  @media screen and (max-width: 1000px) {
+    width: 100%;
+    height: fit-content;
+    padding: 0.5rem;
+    gap: 0.2rem;
+
+    audio::-webkit-media-controls-current-time-display,
+    audio::-webkit-media-controls-time-remaining-display {
+      display: none;
+    }
+  }
+
+  border-radius: 0.4em;
+  background: rgba(225, 222, 222, 0.708);
+  box-shadow: $shadow;
+  align-items: center;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+
+  .audioItem {
+    width: 100%;
+  }
+
+  audio::-webkit-media-controls-enclosure {
+    border-radius: 0.4em;
+    background: none;
+  }
+
+  .senderIcon {
+    height: fit-content;
+  }
+
+  .content {
+    width: 90%;
+    word-wrap: break-word;
+    text-align: left;
+  }
+}

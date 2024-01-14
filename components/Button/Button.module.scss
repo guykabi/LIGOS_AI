@@ -10,14 +10,15 @@ $white: white;
   box-sizing: border-box;
   appearance: none;
   background-color: transparent;
-  border: 2px solid $red;
+  border: 1.5px solid $red;
   border-radius: 0.4em;
   color: $red;
   margin: 0 auto;
-  cursor: pointer;
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  gap: 15px;
+  cursor: pointer;
+  display: flex;
   align-self: center;
   font-size: 1rem;
   font-weight: 400;
@@ -26,6 +27,7 @@ $white: white;
   align-items: center;
   padding: 1.2em 2.8em;
   min-width: fit-content;
+  max-width: 24rem;
   max-height: 5rem;
   text-decoration: none;
   text-align: center;
@@ -55,10 +57,13 @@ $white: white;
   box-sizing: border-box;
   appearance: none;
   background-color: transparent;
-  border: 2px solid $green;
+  border: 1.5px solid $green;
   border-radius: 0.4em;
   color: $green;
   margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
   cursor: pointer;
   display: flex;
   align-self: center;
@@ -69,6 +74,7 @@ $white: white;
   align-items: center;
   padding: 1.2em 2.8em;
   min-width: fit-content;
+  max-width: 24rem;
   max-height: 5rem;
   text-decoration: none;
   text-align: center;
@@ -99,48 +105,9 @@ $white: white;
   border-radius: 0.4em;
   color: $black;
   margin: 0 auto;
-  cursor: pointer;
   display: flex;
-  align-self: center;
-  font-size: 1rem;
-  font-weight: 600;
-  line-height: 1;
-  justify-content: center;
-  align-items: center;
-  padding: 1em 2em;
-  width: 80%;
-  max-width: 24rem;
-  min-width: fit-content;
-  max-height: 5rem;
-  text-decoration: none;
-  text-align: center;
-  text-transform: uppercase;
-  font-family: 'Montserrat', sans-serif;
-
-
-  &:hover{
-    color: #fff;
-    outline: 0;
-  }
-
-  &:active {
-    transform: scale(0.95);
-  }
-
-  transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
-  &:hover {
-    box-shadow: 0 0 40px 40px $black inset;
-  }
-}
-
-.blue{
-  box-sizing: border-box;
-  appearance: none;
-  background-color: transparent;
-  border: 2px solid $blue;
-  border-radius: 0.4em;
-  color: $blue;
-  margin: 0 auto;
+  flex-direction: row;
+  gap: 15px;
   cursor: pointer;
   display: flex;
   align-self: center;
@@ -151,6 +118,7 @@ $white: white;
   align-items: center;
   padding: 1.2em 2.8em;
   min-width: fit-content;
+  max-width: 24rem;
   max-height: 5rem;
   text-decoration: none;
   text-align: center;
@@ -169,18 +137,24 @@ $white: white;
 
   transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
   &:hover {
-    box-shadow: 0 0 40px 40px $blue inset;
+    box-shadow: 0 0 40px 40px $black inset;
   }
 }
+// .black:hover .icon{
+//   background-color: white;
+// }
 
-.purple{
+.blue{
   box-sizing: border-box;
   appearance: none;
   background-color: transparent;
-  border: 2px solid $purple;
+  border: 1.5px solid $blue;
   border-radius: 0.4em;
-  color: $purple;
+  color: $blue;
   margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
   cursor: pointer;
   display: flex;
   align-self: center;
@@ -191,6 +165,51 @@ $white: white;
   align-items: center;
   padding: 1.2em 2.8em;
   min-width: fit-content;
+  max-width: 24rem;
+  max-height: 5rem;
+  text-decoration: none;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+
+  &:hover{
+    color: #fff;
+    outline: 0;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
+  &:hover {
+    box-shadow: 0 0 40px 40px $purple inset;
+  }
+}
+
+.purple{
+  box-sizing: border-box;
+  appearance: none;
+  background-color: transparent;
+  border: 1.5px solid $purple;
+  border-radius: 0.4em;
+  color: $purple;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  cursor: pointer;
+  display: flex;
+  align-self: center;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1;
+  justify-content: center;
+  align-items: center;
+  padding: 1.2em 2.8em;
+  min-width: fit-content;
+  max-width: 24rem;
   max-height: 5rem;
   text-decoration: none;
   text-align: center;
@@ -217,13 +236,13 @@ $white: white;
   box-sizing: border-box;
   appearance: none;
   background-color: transparent;
-  border: 2px solid $white;
+  border: 1.5px solid $white;
   border-radius: 0.4em;
   color: $white;
   margin: 0 auto;
   display: flex;
   flex-direction: row;
-  gap: 10px;
+  gap: 15px;
   cursor: pointer;
   display: flex;
   align-self: center;
@@ -234,6 +253,7 @@ $white: white;
   align-items: center;
   padding: 1.2em 2.8em;
   min-width: fit-content;
+  max-width: 24rem;
   max-height: 5rem;
   text-decoration: none;
   text-align: center;

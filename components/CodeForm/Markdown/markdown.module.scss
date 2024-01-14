@@ -16,14 +16,17 @@
   .code{
     display: flex;
     background-color:lightgrey;
-    // overflow: scroll;
+    overflow: scroll;
     width: fit-content;
-    // max-width: 80%;
     margin-top: 5px;
     margin-bottom: 5px;
     border-radius: 0.4em;
     padding: 10px;
     align-items: center;
+  }
+
+  .code::-webkit-scrollbar{
+    display: none;
   }
 
 }

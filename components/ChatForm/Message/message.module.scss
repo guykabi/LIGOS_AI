@@ -3,7 +3,6 @@
 .userMessage{
 
   @media screen and (max-width: 1000px){
-  
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -20,7 +19,6 @@
     display: flex;
     flex-direction: row;
     width: 100%;
-    // margin: auto;
     height: max-content;
     min-height: 5rem;
     padding: 1.2rem;
@@ -43,7 +41,7 @@
 }
 
 .message{
-
+  
   @media screen and (max-width: 1000px){
     position: relative;
     display: flex;
@@ -57,23 +55,20 @@
     box-shadow:$shadow;
     border-radius: 0.4em;
     gap: 1rem;
-
   }
 
   @media screen and (min-width: 1000px){
     display: flex;
     flex-direction: row;
     width:100%;
-    // margin: auto;
     height: max-content;
-    // min-height: 5rem;
     padding: 1.2rem;
     align-items: center;
     background: rgba(225, 222, 222, 0.708);
     box-shadow:$shadow;
     border-radius: 0.4em;
     gap: 1rem;
-
+    
   }
 
   .senderIcon{

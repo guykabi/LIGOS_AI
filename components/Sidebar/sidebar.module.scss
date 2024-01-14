@@ -88,10 +88,11 @@
 
   }
 
-  .score{
-    position: absolute;
+  .freeUses{
+    // position: absolute;
+    width: 100%;
     bottom: 0;
-    margin: 0px 0px 30px 10px;
+    margin: auto;
     font-weight: 600;
   }
  }
