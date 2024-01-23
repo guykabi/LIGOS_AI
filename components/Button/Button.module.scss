@@ -101,7 +101,7 @@ $white: white;
   box-sizing: border-box;
   appearance: none;
   background-color: transparent;
-  border: 1.5px solid $black;
+  border: 1px solid $black;
   border-radius: 0.4em;
   color: $black;
   margin: 0 auto;
@@ -118,7 +118,6 @@ $white: white;
   align-items: center;
   padding: 1.2em 2.8em;
   min-width: fit-content;
-  max-width: 24rem;
   max-height: 5rem;
   text-decoration: none;
   text-align: center;
@@ -165,7 +164,7 @@ $white: white;
   align-items: center;
   padding: 1.2em 2.8em;
   min-width: fit-content;
-  max-width: 24rem;
+  // max-width: 4rem;
   max-height: 5rem;
   text-decoration: none;
   text-align: center;
@@ -184,7 +183,7 @@ $white: white;
 
   transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
   &:hover {
-    box-shadow: 0 0 40px 40px $purple inset;
+    box-shadow: 0 0 40px 40px $blue inset;
   }
 }
 
@@ -253,7 +252,6 @@ $white: white;
   align-items: center;
   padding: 1.2em 2.8em;
   min-width: fit-content;
-  max-width: 24rem;
   max-height: 5rem;
   text-decoration: none;
   text-align: center;
