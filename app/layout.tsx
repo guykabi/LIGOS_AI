@@ -7,15 +7,14 @@ import { getServerSession } from 'next-auth/next'
 import { authOptions } from './api/auth/[...nextauth]/options'
 import ReactQueryProvider from '@/providers/reactQueryProvider'
 import ToastifyProvider from '@/providers/Toastify/toastifyProvider'
-import Head from 'next/head'
+import ModalProvider from '../providers/modalProvider'
 
 
 const inter = Inter({ subsets: ['latin'] })
 
 const montserrat = Montserrat({
   subsets: ['latin'],
-  variable: '--font-montserrat',
-  // display:'swap'
+  variable: '--font-montserrat'
 })
 
 export const metadata: Metadata = {
@@ -31,16 +30,13 @@ export default async function RootLayout({
 
   const session = await getServerSession(authOptions)
 
-
   return (
     <html lang="en" className={`${montserrat.variable}`}>
-      <Head>
-       <link href="/AI_LOGO.png" rel={"icon"} sizes="any" />
-      </Head>
       <AuthProvider session={session}>
         <ReactQueryProvider>
           <body className={inter.className}>
            <ToastifyProvider> 
+            <ModalProvider/>
             {children}
            </ToastifyProvider>
           </body>

@@ -7,10 +7,8 @@ import { Cards } from "@/components/Card/constants";
 import styles from "./dashboard.module.scss";
 import Header from "@/components/Header/header";
 import { MdOutlineSpaceDashboard } from "react-icons/md";
-import { routes } from "@/components/Sidebar/constants";
 
 function Dashboard() {
-
 
   return (
     <div className={global.globalServiceWrapper}>
