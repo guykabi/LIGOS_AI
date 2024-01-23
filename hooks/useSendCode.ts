@@ -10,7 +10,7 @@ export const useSendCode = () => useMutation(sendCode,{
   // },
 });
 
-export const sendCode = async (message:MessageModel[]) =>{
-  const {data} = await axios.post<MessageModel>('/api/code',{messages:message})
+export const sendCode = async (messages:MessageModel[]) =>{
+  const {data} = await axios.post<MessageModel>('/api/code',{messages})
   return data
 }

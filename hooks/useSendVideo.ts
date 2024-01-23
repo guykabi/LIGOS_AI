@@ -1,6 +1,6 @@
 import { useMutation } from "react-query";
 import axios from "axios";
-import { FormSchemaType, MessageModel } from "@/utils/types";
+import { FormSchemaType } from "@/utils/types";
 
 
 export const useSendVideo = () => useMutation(sendVideo,{
@@ -11,6 +11,7 @@ export const useSendVideo = () => useMutation(sendVideo,{
 });
 
 export const sendVideo = async (content:FormSchemaType) =>{
+    
   const {data} = await axios.post<string>('/api/video',content)
   return data
 }
