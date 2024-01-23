@@ -1,11 +1,9 @@
 import { NextResponse, NextRequest } from "next/server";
 import OpenAI from "openai";
-import { authOptions } from "../auth/[...nextauth]/options";
-import { getServerSession } from "next-auth/next";
-import { NextApiRequest, NextApiResponse } from "next";
 import connectDB from "../libs/mongodb";
 import {checkFreeLimit,freeTrialIncrease} from '../libs/apiLimit'
-import { setEngine } from "crypto";
+import Message from "../libs/models/Message";
+import { handleServerSession } from "../utils";
 
 
 const openai = new OpenAI({
@@ -25,17 +23,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     const { messages } = await req.json();
 
-    const session = await getServerSession(
-      req as unknown as NextApiRequest,
-      {
-        ...res,
-        getHeader: (name: string) => res.headers?.get(name),
-        setHeader: (name: string, value: string) =>
-          res.headers?.set(name, value),
-      } as unknown as NextApiResponse,
-      authOptions
-    );
-
+    const session = await handleServerSession(req,res)
 
     if (!session) {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
@@ -52,7 +40,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
       return new NextResponse("No prompt was provided",{status:400})
      }    
 
-    const freeTrial = await checkFreeLimit(session.user.id)
+    const freeTrial = session?.user?.premium ? true : await checkFreeLimit(session.user.id)
 
     if(!freeTrial){
       return NextResponse.json({message:'Free trial has expired'},{status:403})
@@ -63,7 +51,16 @@ export async function POST(req: NextRequest, res: NextResponse) {
     //   messages: [instructionMessage, ...messages],
     // });
 
-    await freeTrialIncrease(session.user.id)
+    await Message.create({
+      content:messages[messages.length-1].content,
+      userId:session?.user?.id,
+      service:'Code'
+     })
+
+    if(!session.user.premium){
+      await freeTrialIncrease(session.user.id)
+    }
+
 
     // return NextResponse.json(response.choices[0].message);
     return NextResponse.json('Success sending',{status:200});

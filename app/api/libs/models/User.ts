@@ -1,17 +1,21 @@
-import mongoose,{Schema} from 'mongoose' 
+import mongoose,{Schema,Model} from 'mongoose' 
 
-interface UserSchemaType extends Document{
-  fullname:String, 
-  email:String,
-  password:String,
-  freeUses:Number,
-  provider:[String],
-  premium:Boolean,
-  image:String
+export type UserType = {
+  fullname:string, 
+  email:string,
+  password?:string,
+  freeUses?:number,
+  provider?:[string],
+  premium?:boolean,
+  image?:string
 }
 
+interface UserSchemaType extends Document, UserType{}
 
-const UserSchema:Schema = new Schema<UserSchemaType>({
+type UserModel = Model<UserSchemaType>
+
+
+const UserSchema:Schema = new Schema<UserSchemaType,UserModel>({
   fullname:String, 
   email:{type: String, required: true}, 
   password:String,
@@ -24,6 +28,6 @@ const UserSchema:Schema = new Schema<UserSchemaType>({
 )
 
 
-const User =  mongoose.models.User || mongoose.model<UserSchemaType>('User', UserSchema);
+const User:UserModel =  mongoose.models.User || mongoose.model<UserSchemaType>('User', UserSchema);
 
 export default User
