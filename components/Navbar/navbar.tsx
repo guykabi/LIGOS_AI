@@ -1,6 +1,5 @@
 'use client'
 
-import React from 'react'
 import styles from './navbar.module.scss'
 import { signOut } from 'next-auth/react'
 import {useSession} from 'next-auth/react'
@@ -23,8 +22,6 @@ export const Navbar = ({freeUses}:NavbarProps) => {
     await signOut({redirect:false})
     push('/')
   }
- 
- 
   return (
     <div className={styles.navbar}>
       <div className={styles.userDetails}>
@@ -38,7 +35,7 @@ export const Navbar = ({freeUses}:NavbarProps) => {
              />:
             <RxAvatar size={20}/>}
         
-        <p>{session? `Hey, ${session?.user?.name}`:'Guest'}</p>
+        <p>{session? `${session?.user?.name}`:'Guest'}</p>
       </div>
       <div className={styles.freeCounterNavBar}>
         <FreeCounter counter={freeUses} />
