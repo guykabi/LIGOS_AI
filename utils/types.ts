@@ -1,9 +1,10 @@
 import { ToastPosition } from 'react-toastify'
-import {formSchema, imageFormSchema, signUpSchema} from './zod/schemas' 
+import {formSchema, imageFormSchema, signInSchema, signUpSchema} from './zod/schemas' 
 import {z} from 'zod'
 import { AxiosError } from 'axios'
 
-export type SignUpSchema = z.infer< typeof signUpSchema> 
+export type signInSchemaType = z.infer< typeof signInSchema>
+export type SignUpSchemaType = z.infer< typeof signUpSchema>
 export type FormSchemaType = z.infer< typeof formSchema> 
 export type ImageSchemaType = z.infer< typeof imageFormSchema>
 export type ErrorType = typeof AxiosError | Error
