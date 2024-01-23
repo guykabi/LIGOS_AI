@@ -6,8 +6,8 @@ import connectDB from "./mongodb";
 export const freeTrialIncrease = async (userId: string) => {
   try {
     const userUses = await User.findById(userId);
-
-    if (userUses?.freeUses < MAX_FREE_USES) {
+       
+    if (userUses?.freeUses !== undefined && userUses?.freeUses < MAX_FREE_USES) {
       const usesCount = await User.findByIdAndUpdate(
         { _id: userId },
         { freeUses: (userUses.freeUses += 1) },
@@ -25,8 +25,8 @@ export const checkFreeLimit = async (userId: string) => {
     if (!userId) return false;
 
     const userUses = await User.findById(userId);
-
-    if (userUses?.freeUses < MAX_FREE_USES) {
+    
+    if (userUses?.freeUses !== undefined && userUses?.freeUses < MAX_FREE_USES) {
       return true;
     } else {
       return false;
