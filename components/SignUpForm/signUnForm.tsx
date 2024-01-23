@@ -6,7 +6,7 @@ import styles from "./signUpForm.module.scss";
 import { FieldValues, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signUpSchema } from "../../utils/zod/schemas";
-import { SignUpSchema } from "@/utils/types";
+import { SignUpSchemaType } from "@/utils/types";
 import { handleRegister } from "@/actions/auth/register";
 import { FaArrowLeft } from "react-icons/fa";
 import Link from "next/link";
@@ -42,7 +42,7 @@ export const SignUpForm = () => {
     handleSubmit,
     formState: { errors, isSubmitting },
     reset,
-  } = useForm<SignUpSchema>({
+  } = useForm<SignUpSchemaType>({
     resolver: zodResolver(signUpSchema),
   });
 
@@ -110,14 +110,15 @@ export const SignUpForm = () => {
               <p>{errors.confirmPassword.message}</p>
             ) : null}
           </main>
-
+          <div className={styles.submitBtn}>
           <Button
             disabled={isLoading}
-            width={70}
+            width={100}
             text={isLoading ? "Loading..." : "Send"}
             theme="black"
             type="submit"
           />
+          </div>
         </form>
       </div>
     </div>

@@ -20,28 +20,32 @@ import ImageCard from "./ImageCard/imageCard";
 import { amountOptions, resolutionOptions } from "./constants";
 import SkeletonLoader from "../CardLoader/cardLoader";
 import { useSendImage } from "@/hooks/useSendImage";
+import { usePremiumModal } from "@/hooks/usePremiumModal";
+
+const allImages = [
+  {
+    url: "https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg",
+  },
+  {
+    url: "https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg",
+  },
+  {
+    url: "https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg",
+  },
+  {
+    url: "https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg",
+  },
+  {
+    url: "https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg",
+  },
+]
 
 
 const ImageForm = () => {
-  const [images, setImages] = useState<ImageType[]>([
-    {
-      url: "https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg",
-    },
-    {
-      url: "https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg",
-    },
-    {
-      url: "https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg",
-    },
-    {
-      url: "https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg",
-    },
-    {
-      url: "https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg",
-    },
-  ]);
+  const [images, setImages] = useState<ImageType[]>(allImages);
 
   const {refresh} = useRouter()
+  const {onOpen} = usePremiumModal()
 
   const {
     data:newImage,
@@ -57,7 +61,7 @@ const ImageForm = () => {
     });
 
   const handleMessage = async (values: ImageSchemaType) => {
-    // setImages([])
+    setImages([])
     reset()
     sendImage(values);
   };
@@ -82,7 +86,7 @@ const ImageForm = () => {
   useEffect(()=>{
 
     if (!newImage?.length) return
-
+     
       const urls = newImage?.map(({ url }) => ({ url }));
       setImages(urls);
       refresh()
@@ -90,7 +94,12 @@ const ImageForm = () => {
 
   useEffect(()=>{
     if (!error) return 
-      ErrorHandler(error);
+    reset()
+
+    let res = ErrorHandler(error);
+    if (res === "Premuim is required") onOpen();
+
+
   },[error])
 
   return (
@@ -135,7 +144,6 @@ const ImageForm = () => {
                 )}
               />
             </FormControl>
-            {/* <FormHelperText error={true}>{errors.level?.message}</FormHelperText> */}
           </Box>
 
           <Box style={{ minWidth: "45%" }}>

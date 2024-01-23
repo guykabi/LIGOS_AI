@@ -2,11 +2,11 @@
 
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import {useRouter} from 'next/navigation'
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormSchemaType, MessageModel } from "@/utils/types";
 import { formSchema } from "@/utils/zod/schemas";
-import { useSendMessage } from "@/hooks/useSendMessage";
+import { useSendMessage } from "@/hooks/useMessages/useSendMessage";
 import Button from "../Button/Button";
 import styles from "./chatForm.module.scss";
 import Empty from "../Empty/empty";
@@ -14,6 +14,8 @@ import Loader from "../Loader/loader";
 import Message from "./Message/message";
 import { ErrorHandler } from "../../utils/errorHandler";
 import { SpinnerLoader } from "../SpinnerLoader.tsx/spinnerLoader";
+import { usePremiumModal } from "@/hooks/usePremiumModal";
+import { useGetMessages } from "@/hooks/useMessages/useGetMessage";
 
 const allMessages: MessageModel[] = [
   { content: "ecnejfvnnceojofrc4h4urf4rvv4urv4r", role: "user" },
@@ -44,25 +46,23 @@ const allMessages: MessageModel[] = [
 
 const ChatForm = () => {
   const [messages, setMessages] = useState<MessageModel[]>(allMessages);
-  const {refresh} = useRouter()
+  const { refresh } = useRouter();
+  const { onOpen } = usePremiumModal();
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    getValues,
-    reset,
-  } = useForm<FormSchemaType>({
-    resolver: zodResolver(formSchema),
-  });
 
+  const { register, handleSubmit, watch, getValues, reset } =
+    useForm<FormSchemaType>({
+      resolver: zodResolver(formSchema),
+    });
+
+    
   const {
     mutate: sendMessage,
     data: newMessage,
     isLoading,
     error,
     isSuccess
-    } = useSendMessage();
+  } = useSendMessage();
 
   const handleMessage = async (message: FormSchemaType) => {
     const newMessage: MessageModel = {
@@ -93,30 +93,28 @@ const ChatForm = () => {
     </div>
   );
 
-  useEffect(()=> {
+  useEffect(() => {
+    if (!newMessage) return;
 
-    if (!newMessage) return
+    let userMessage: MessageModel = {
+      role: "user",
+      content: getValues("content"),
+    };
+
+    reset();
+
+    setMessages([...messages, userMessage, newMessage]);
+    refresh();
+  }, [isSuccess]);
+
+  useEffect(() => {
+    if (!error) return;
+    reset();
+
+    let res = ErrorHandler(error);
+    if (res === "Premuim is required") onOpen();
     
-      let userMessage: MessageModel = {
-        role: "user",
-        content: getValues("content")
-      };
-
-      reset();
-      
-      setMessages([...messages, userMessage, newMessage]);
-      refresh()
-  
-  },[isSuccess])
-
-
-
-  useEffect(()=>{
-    if (!error) return 
-      reset()
-      ErrorHandler(error);
-  },[error])
-
+  }, [error]);
 
   return (
     <div className={styles.chatFormWrapper}>

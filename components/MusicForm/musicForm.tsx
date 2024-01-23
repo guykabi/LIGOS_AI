@@ -15,16 +15,17 @@ import { ErrorHandler } from "../../utils/errorHandler";
 import { SpinnerLoader } from "../SpinnerLoader.tsx/spinnerLoader";
 import { useSendMusic } from "@/hooks/useSendMusic";
 import Audio from "./Audio/audio";
+import { usePremiumModal } from "@/hooks/usePremiumModal";
 
 
 const MusicForm = () => {
   const [music, setMusic] = useState<MusicType[]>([]);
   const {refresh} = useRouter()
+  const {onOpen} = usePremiumModal()
 
   const {
     mutate: sendMusic,
     data: newMusic,
-    status,
     isLoading,
     error,
     isSuccess,
@@ -35,7 +36,6 @@ const MusicForm = () => {
     handleSubmit,
     watch,
     getValues,
-    formState: { errors, isSubmitting },
     reset,
   } = useForm<FormSchemaType>({
     resolver: zodResolver(formSchema),
@@ -80,7 +80,11 @@ const MusicForm = () => {
 
   useEffect(()=>{
     if(!error) return
-      ErrorHandler(error);
+    reset()
+
+    let res = ErrorHandler(error);
+    if(res === 'Premuim is required') onOpen()
+    
   },[error])
 
   return (

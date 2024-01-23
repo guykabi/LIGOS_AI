@@ -15,6 +15,7 @@ import { ErrorHandler } from "../../utils/errorHandler";
 import { SpinnerLoader } from "../SpinnerLoader.tsx/spinnerLoader";
 import Video from "./Video/video";
 import { useSendVideo } from "@/hooks/useSendVideo";
+import { usePremiumModal } from "@/hooks/usePremiumModal";
 
 
 
@@ -22,6 +23,7 @@ const VideoForm = () => {
 
   const [videos, setVideo] = useState<VideoType[]>([]);
   const {refresh} = useRouter()
+  const {onOpen} = usePremiumModal()
 
   const {
     mutate: sendVideo,
@@ -83,7 +85,11 @@ const VideoForm = () => {
 
   useEffect(()=>{
     if (!error) return 
-      ErrorHandler(error);
+    reset()
+   
+    let res = ErrorHandler(error);
+    if(res === 'Premuim is required') onOpen();
+
   },[error])
 
   return (

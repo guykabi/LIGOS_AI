@@ -14,6 +14,8 @@ import Message from "../ChatForm/Message/message";
 import { ErrorHandler } from "../../utils/errorHandler";
 import { SpinnerLoader } from "../SpinnerLoader.tsx/spinnerLoader";
 import { useSendCode } from "@/hooks/useSendCode";
+import { usePremiumModal } from "@/hooks/usePremiumModal";
+
 
 const allMessages: MessageModel[] = [
   { content: "efgegegergegegeg efkgneofgog efjon", role: "user" },
@@ -44,6 +46,7 @@ const allMessages: MessageModel[] = [
 
 const CodeForm = () => {
   const [messages, setMessages] = useState<MessageModel[]>(allMessages);
+  const {onOpen} = usePremiumModal()
   const {refresh} = useRouter()
 
   const {
@@ -108,7 +111,11 @@ const CodeForm = () => {
 
   useEffect(()=>{
     if (!error) return 
-      ErrorHandler(error);
+    reset()
+
+    let res = ErrorHandler(error);
+    if (res === "Premuim is required") onOpen();
+
   },[error])
 
   
