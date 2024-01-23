@@ -5,13 +5,14 @@ import { handleToast } from "../providers/Toastify/toastify"
 
 export const ErrorHandler = (error: any) => {
 
+
   if (isAxiosError(error)) {
     
     if (error.response?.status! < 500) {
       
-    //  if(error.response?.status === 403){
-    //    //return Premium modal
-    //  }
+     if(error.response?.status === 403){
+         return 'Premuim is required'
+     }
 
       handleToast({
         type: 'error',
@@ -22,7 +23,16 @@ export const ErrorHandler = (error: any) => {
     } else {      
       throw new Error(error.response?.data.message)
     }
-  } else {
+    
+  }
+  else if(typeof error === 'string'){
+    handleToast({
+      type: 'error',
+      text: error,
+      position: 'top-center'
+    })
+  }
+   else {
     throw new Error('Something went wrong')
   }
 
