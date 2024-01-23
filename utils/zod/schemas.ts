@@ -1,5 +1,11 @@
 import {z} from 'zod' 
 
+
+export const signInSchema = z.object({
+  email: z.string().email(),
+  password: z.string()
+})
+
 export const signUpSchema = z.object({
   fullname: z.string().min(2, "At least 2 characters").max(20, "At most 20 characters"),
   email: z.string().email() ,
