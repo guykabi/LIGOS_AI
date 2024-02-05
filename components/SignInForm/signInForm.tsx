@@ -15,11 +15,12 @@ import { SpinnerLoader } from "../SpinnerLoader.tsx/spinnerLoader";
 
 const SignInForm = () => {
   const [isError, setIsError] = useState<string | undefined>();
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { isSubmitting },
     reset,
   } = useForm<signInSchemaType>({
     resolver: zodResolver(signInSchema),
@@ -28,12 +29,12 @@ const SignInForm = () => {
   const handleCredentialsSignIn = async ({ email, password }: FieldValues) => {
     let res = await signIn("credentials", {
       callbackUrl: "/dashboard",
-      redirect: false,
+      redirect: true,
       email,
       password,
     });
-
-    reset()
+    
+    reset();
 
     if (res?.error) {
       setIsError(res.error);
@@ -41,12 +42,15 @@ const SignInForm = () => {
   };
 
   const handleProvidersSignIn = async (provider: string) => {
+    setIsLoading(true);
     const res = await signIn(provider, {
       callbackUrl: "/dashboard",
       redirect: false,
     });
+    setIsLoading(false);
 
     if (res?.error) {
+      setIsLoading(false);
       setIsError(res.error);
     }
   };
@@ -65,7 +69,9 @@ const SignInForm = () => {
       </div>
       <div className={styles.innerWrapper}>
         <div className={styles.header}>
-          <h2 className={styles.title}>Sign In</h2>
+          <h2 className={styles.title}>
+            Sign In
+          </h2>
         </div>
         <form
           onSubmit={handleSubmit(handleCredentialsSignIn)}
@@ -91,7 +97,13 @@ const SignInForm = () => {
             />
           </div>
         </form>
-        <div className={styles.divderLine}>OR</div>
+        <div className={styles.divderLine}>
+        {isLoading || isSubmitting ? (
+              <SpinnerLoader size={30} color="black" />
+            ) : (
+              "OR"
+            )}
+        </div>
         <div className={styles.providersButtons}>
           <div className={styles.innerProvidersButtons}>
             <Button
@@ -99,6 +111,7 @@ const SignInForm = () => {
               icon={<FaGithub color="red" />}
               theme="black"
               width={100}
+              disabled={isLoading}
               onClick={() => handleProvidersSignIn("github")}
             />
             <Button
@@ -106,6 +119,7 @@ const SignInForm = () => {
               theme="blue"
               icon={<FaGoogle color="red" />}
               width={100}
+              disabled={isLoading}
               onClick={() => handleProvidersSignIn("google")}
             />
           </div>
