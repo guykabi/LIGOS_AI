@@ -40,15 +40,16 @@ export const checkFreeLimit = async (userId: string) => {
 export const checkApiLimitCount = async (userId:string) =>{
   try {
     await connectDB()
+    
     const userUses = await User.findById(userId);
-   
+    
     if (!userUses?.freeUses) {
       return 0
     }
     
     return userUses?.freeUses
     
-  } catch (error) {
+  } catch (error) {    
     throw new Error('Internal Error')  
   }
 }
