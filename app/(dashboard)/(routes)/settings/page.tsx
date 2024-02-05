@@ -4,6 +4,12 @@ import Header from '@/components/Header/header'
 import {routes} from '../../../../components/Sidebar/constants'
 import {IoSettingsOutline } from "react-icons/io5";
 import SettingsForm from '@/components/SettingsForm/settingsForm';
+import { Metadata } from 'next'
+
+
+export const metadata: Metadata = {
+  title: 'Settings',
+};
 
 const Settings = () => {
 

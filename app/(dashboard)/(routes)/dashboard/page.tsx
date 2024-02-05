@@ -12,8 +12,8 @@ function Dashboard() {
 
   return (
     <div className={global.globalServiceWrapper}>
-      <Header 
-      title="LIGOS" 
+      <Header
+      title="LIGOS"
       description="Feel the power of AI"
       icon={<MdOutlineSpaceDashboard size={25}/>}
       color='rgb(75, 75, 159)'
