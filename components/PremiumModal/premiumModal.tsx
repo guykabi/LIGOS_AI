@@ -43,7 +43,7 @@ const PremiumModal = () => {
           </div>
         ))}
         <div className={styles.upgradeBtn}>
-          <button>Upgrade</button>
+          <button>UPGRADE</button>
         </div>
       </List>
     </Dialog>
