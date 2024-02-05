@@ -10,7 +10,7 @@ const nextConfig = {
         hostname: "**",
       },
     ],
-    domains: ["**"],
+    domains: ["**", "res.cloudinary.com"],
     formats: ['image/avif', 'image/webp'],
   },
 }
