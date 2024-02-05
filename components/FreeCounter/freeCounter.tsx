@@ -2,9 +2,9 @@
 
 import styles from "./freeCounter.module.scss";
 import { MAX_FREE_USES } from "@/app/api/libs/constants";
-import { usePremiumModal } from "@/hooks/usePremiumModal";
 import Box from "@mui/material/Box";
 import LinearProgress from "@mui/material/LinearProgress";
+import UpgradeBtn from "./UpgardeBtn/upgradeBtn";
 
 type freeCounterProps = {
   counter: number;
@@ -12,7 +12,6 @@ type freeCounterProps = {
 
 const FreeCounter = ({ counter = 0 }: freeCounterProps) => {
 
-  const {onOpen} = usePremiumModal()
 
   return (
     <div className={styles.freeCounter}>
@@ -35,9 +34,7 @@ const FreeCounter = ({ counter = 0 }: freeCounterProps) => {
           />
         </Box>
       </div>
-      <div className={styles.upgradeBtn}>
-        <button onClick={onOpen}>Upgrade</button>
-      </div>
+      <UpgradeBtn/>
     </div>
   );
 };
