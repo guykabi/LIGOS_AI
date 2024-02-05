@@ -10,7 +10,7 @@ import Markdown from '@/components/CodeForm/Markdown/markdown';
 
 type MessageProps = {
   content: string;
-  role?: 'system' | 'user';
+  role?: 'assistant' | 'user';
 };
 
 const Message = ({ content, role }: MessageProps) => {
@@ -45,7 +45,7 @@ const Message = ({ content, role }: MessageProps) => {
           </div>
         )}
         <div className={styles.content}>
-          {pathname.startsWith('/codeGeneration') ? (
+          {pathname.startsWith('/Code') ? (
             <Markdown content={content} />
           ) : (
             <>{content}</>
