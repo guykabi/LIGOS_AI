@@ -6,6 +6,7 @@ import Image from "next/image";
 import { routes } from "../Sidebar/constants";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import SideBarMobileCard from "./SideBarMobileCard/sideBarMobileCard";
 
 const SidebarMobile = () => {
   const pathname = usePathname();
@@ -22,17 +23,7 @@ const SidebarMobile = () => {
       </div>
       <div className={styles.mobileSidebarIcons}>
         {routes.map((card) => (
-          <Link
-            key={card.href}
-            href={`${card.href}`}
-            className={
-              pathname.startsWith(card.href)
-                ? styles.mobileIconActive
-                : styles.mobileIcon
-            }
-          >
-            {<card.icon size={20} />}
-          </Link>
+            <SideBarMobileCard route={card} path={pathname}/>
         ))}
       </div>
     </div>

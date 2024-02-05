@@ -7,6 +7,9 @@ import Image from "next/image";
 import { routes } from "./constants";
 import { usePathname } from "next/navigation";
 import FreeCounter from "../FreeCounter/freeCounter";
+import SideBarCard from "./SideBarCard/sideBarCard";
+import { useSession } from "next-auth/react";
+import PremiumTag from "../PremiumTag/premiumTag";
 
 type SideBarProps = {
   freeUses:number
@@ -14,6 +17,8 @@ type SideBarProps = {
 
 function Sidebar({freeUses}:SideBarProps) {
   const pathname = usePathname();
+  const {data:session} = useSession()
+  
 
   return (
     <div className={styles.sidebar}>
@@ -28,24 +33,11 @@ function Sidebar({freeUses}:SideBarProps) {
         
         <div className={styles.routesWrapper}>
           {routes.map((route) => (
-            <Link
-              key={route.href}
-              href={route.href}
-              className={
-                pathname.startsWith(route.href)
-                  ? styles.routerLinkActive
-                  : styles.routeLink
-              }
-            >
-              <div className={styles.routeLabel}>
-                <p>{route.icon ? <route.icon /> : null}</p>
-                <p>{route.label}</p>
-              </div>
-            </Link>
+            <SideBarCard key={route.href} route={route} path={pathname}/>
           ))}
         </div>
         <div className={styles.freeUses}>
-          <FreeCounter counter={freeUses}/>
+          {session?.user.premium ? <PremiumTag/> : <FreeCounter counter={freeUses}/>}
         </div>
       </div>
     </div>
