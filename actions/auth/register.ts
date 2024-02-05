@@ -1,4 +1,3 @@
-import { SignUpSchema } from "@/utils/types";
 import axios from "axios"; 
 import {FieldValues} from 'react-hook-form'
 
