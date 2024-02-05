@@ -1,17 +1,19 @@
 import { ToastPosition } from 'react-toastify'
-import {formSchema, imageFormSchema, signInSchema, signUpSchema} from './zod/schemas' 
+import {detailsFormSchema, formSchema, imageFormSchema, signInSchema, signUpSchema} from './zod/schemas' 
 import {z} from 'zod'
 import { AxiosError } from 'axios'
+import { Service } from '@/app/api/libs/models/Message'
 
 export type signInSchemaType = z.infer< typeof signInSchema>
 export type SignUpSchemaType = z.infer< typeof signUpSchema>
 export type FormSchemaType = z.infer< typeof formSchema> 
 export type ImageSchemaType = z.infer< typeof imageFormSchema>
+export type DetailsSchemaType = z.infer<typeof detailsFormSchema>
 export type ErrorType = typeof AxiosError | Error
 
 
 export type User = Partial<{
-  fullname:string
+  name:string
   email:string
   password:string
   provider:[string]
@@ -22,7 +24,7 @@ export type User = Partial<{
 
 export type MessageModel = {
   content:string
-  role:'user' | 'system'
+  role:'user' | 'assistant'
 }
 
 export type ImageType = {
@@ -40,9 +42,6 @@ export type VideoType = {
   content?:string
 }
 
-
-
-
 export type ServiceCard = {
   title:string
   content:string
@@ -54,6 +53,17 @@ export type Toastify = {
   type: 'error' | 'warning' | 'success'
   text:string
   position: ToastPosition
+}
+
+
+export type ServiceMessage = {
+  service?:Service|undefined
+  message:string
+}
+
+export interface ServiceContextType {
+  question: ServiceMessage;
+  setQuestion: (question: ServiceMessage) => void;
 }
 
 
