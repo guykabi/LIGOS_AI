@@ -8,7 +8,7 @@
   .dialogHeader {
     height: 100%;
     text-align: center;
-    font-weight: 600;
+    font-weight: 500;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -27,6 +27,7 @@
     .chip{
       background-image: $button-colorful;
       margin: 0 auto;
+      color: white;
     }
   }
 
@@ -82,6 +83,7 @@
         transition: 0.4s;
         background-image: $button-colorful;
         width: 100%;
+        color: white;
 
         @media screen and (max-width: 869px) {
           height: 1.8rem;

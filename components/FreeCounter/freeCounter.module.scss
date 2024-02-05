@@ -71,6 +71,8 @@
     cursor: pointer;
     transition: 0.4s;
     background-image: $button-colorful;
+    color: white;
+
 
     @media screen and (max-width: 869px){
       width: 78%;

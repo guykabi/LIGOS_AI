@@ -1,0 +1,149 @@
+@import '../../../public/assets/styles/variables.module.scss';
+
+  .routeLink {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 0.4em;
+    padding: 10px;
+    cursor: pointer;
+    transition: 0.4s;
+
+    .cardHeaderWrapper{
+       display: flex;
+       flex-direction: row;
+       justify-content: space-between;
+
+        .link{
+          width: 100%;
+        }
+    
+        .routeLabel {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          gap: 10px;
+          font-weight: 500;
+        }
+    
+        .openArrow{
+        display: none;
+        }
+      }
+    
+    }
+    .routeLink:hover {
+      background-color: rgba(255, 255, 255, 0.368);
+    }
+
+
+
+  .routerLinkActive {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    justify-content: space-between;
+    border-radius: 0.4em;
+    padding: 10px;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.368);
+
+    .cardHeaderWrapper{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+
+    .link{
+      width: 90%;
+    }
+
+    .routeLabel {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 10px;
+      font-weight: 500;
+    }
+
+    .openArrow{
+     display: none;
+    }
+  }
+}
+
+  .routerLinkActive:hover .openArrow{
+    display: block;
+    position: absolute;
+    z-index: 10;
+    right: 0;
+    padding: 0px 5px 0px 5px;
+    transition: 0.4s;
+  }
+
+  .openArrow:hover{
+    color: $hover-white;
+  }
+
+
+  .loader{
+    position: absolute;
+    z-index: 10;
+    right: 0;
+    padding: 0px 5px 0px 5px;
+  }
+
+
+  .previousQuestions{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    height: 100%;
+    max-height: 7rem;
+    overflow-y:scroll;
+    overflow-x: hidden;
+
+    div{
+      width: 100%;
+      padding: 0.4rem;
+      border-radius: 0.4em;
+      transition: 0.4s;
+      font-weight: 500;
+      border-bottom: 1px solid lightgray;
+      --mask: linear-gradient(to right, 
+      rgba(0,0,0, 1) 0,   rgba(0,0,0, 1) 82%, 
+      rgba(0,0,0, 0) 95%, rgba(0,0,0, 0) 0
+      ) 100% 50% / 100% 100% repeat-x;
+      -webkit-mask: var(--mask); 
+      mask: var(--mask);
+    }
+
+    div:hover{
+      background-color: $hover-white;
+    }
+
+  }
+
+  .previousQuestions::-webkit-scrollbar {
+    width:8px; /* Adjust the width as needed */
+  }
+  
+  /* Style for the scrollbar thumb */
+  .previousQuestions::-webkit-scrollbar-thumb {
+    background-color:white; /* Color of the scrollbar thumb */
+    border-radius: 6px; /* Adjust the border radius as needed */
+  }
+  
+  /* Optional: Style for the scrollbar track (the part scrollbar thumb moves on) */
+  .previousQuestions::-webkit-scrollbar-track {
+    background-color: transparent; /* Make the scrollbar track transparent */
+  }
+  
+  /* Optional: Style for the scrollbar corner (where horizontal and vertical scrollbars meet) */
+  .previousQuestions::-webkit-scrollbar-corner {
+    background-color: transparent; /* Make the scrollbar corner transparent */
+  }

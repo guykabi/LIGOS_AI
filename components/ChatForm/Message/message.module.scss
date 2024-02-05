@@ -55,6 +55,7 @@
     box-shadow:$shadow;
     border-radius: 0.4em;
     gap: 1rem;
+    line-height: 25px;
   }
 
   @media screen and (min-width: 1000px){
@@ -68,7 +69,7 @@
     box-shadow:$shadow;
     border-radius: 0.4em;
     gap: 1rem;
-    
+    line-height: 40px;
   }
 
   .senderIcon{

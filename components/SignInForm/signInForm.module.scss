@@ -47,6 +47,7 @@
     padding: 1rem;
     border-radius: 0.5em;
     background-color: white;
+    text-align: center;
 
     .header {
       @media screen and (max-width: 1000px) {
@@ -57,7 +58,6 @@
         width: 75%;
       }
 
-      text-align: center;
     }
 
     .credentialsForm {
@@ -89,7 +89,7 @@
         height: 3rem;
         border-radius: 0.4em;
         padding: 0.8rem;
-        border: 1px lightgray solid;
+        border: 2px lightgray solid;
         letter-spacing: 1px;
         font-size: medium;
       }

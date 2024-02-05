@@ -24,8 +24,6 @@
     background-image:$secondary-background;
 
     .bg-image{
-
-      // @media screen and (min-width: 980px){
          
       position: relative;
       height: 100%;
@@ -34,13 +32,8 @@
       background-position-x:0;
       background-position-y:center;
       width: 100%;
-      //filter: blur((2px));
       z-index: 0;
-      //} 
-
-      // @media screen and (max-width: 980px){
-      //   display: none;
-      // }
+      
 
     }
 
@@ -61,7 +54,6 @@
 
   .innerWrapper{
     position: relative;
-    // float: right;
     display: flex;
 
     @media screen and (min-width: 980px){

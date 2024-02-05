@@ -1,3 +1,5 @@
+@import '../../public/assets/styles/variables.module.scss';
+
 .imageFormWrapper{ 
   position: relative;
   height: 100%;
@@ -74,13 +76,22 @@
          .btnWrapperMobile{
            width: 15%;
            justify-content: flex-end;
+           transition: 0.4s;
+           text-align: center;
+
            button{
              background-color: transparent;
              border: none;
              font-weight: bold;
              cursor: pointer;
            }
+
+           button:hover{
+            color: $hover-black !important;
+           }
+
          }
+
        }
 
        input{
