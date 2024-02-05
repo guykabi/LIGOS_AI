@@ -77,12 +77,12 @@ export const SignUpForm = () => {
         <form className={styles.form} onSubmit={handleSubmit(handleForm)}>
           <main className={styles["form-main"]}>
             <input
-              {...register("fullname")}
-              name="fullname"
+              {...register("name")}
+              name="name"
               type="text"
-              placeholder="Fullname"
+              placeholder="name"
             />
-            {errors.fullname ? <p>{errors.fullname.message}</p> : null}
+            {errors.name ? <p>{errors.name.message}</p> : null}
 
             <input
               {...register("email")}
