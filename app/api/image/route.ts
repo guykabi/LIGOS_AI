@@ -3,7 +3,7 @@ import OpenAI from "openai";
 import connectDB from "../libs/mongodb";
 import { checkFreeLimit, freeTrialIncrease } from "../libs/apiLimit";
 import Message from "../libs/models/Message";
-import { handleServerSession } from "../utils";
+import { getServiceMessages, handleInsertMessage, handleServerSession } from "../utils";
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -41,17 +41,17 @@ export async function POST(req: NextRequest, res: NextResponse) {
       return NextResponse.json({message:'Free trial has expired'},{status:403})
     }
 
-    // const response = await openai.images.generate({
-    //   prompt,
-    //   n: parseInt(amount, 10),
-    //   size: resolution,
-    // });
+    const response = await openai.images.generate({
+      prompt,
+      n: parseInt(amount, 10),
+      size: resolution
+    });
 
-    await Message.create({
-      content:prompt,
-      userId:session?.user?.id,
-      service:'Image'
-    })
+    await handleInsertMessage(
+      prompt,
+      session?.user?.id,
+      'Image'
+    )
 
     
     if(!session?.user?.premium){
@@ -59,10 +59,36 @@ export async function POST(req: NextRequest, res: NextResponse) {
     }
 
 
-    // return NextResponse.json(response.data);
-    return NextResponse.json(['Success sending'],{status:200});
+    return NextResponse.json(response.data);
 
   } catch (error) {
     return NextResponse.json({ message: "Internal Error",error }, { status: 500 });
   }
 }
+
+
+
+export async function GET(req: NextRequest, res: NextResponse) {
+
+  try {
+    
+    const session = await handleServerSession(req,res)
+
+    if (!session) {
+      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+    }
+
+    const allMessages = await getServiceMessages(session.user.id,'Image')
+
+    return NextResponse.json(allMessages,{status:200});
+ 
+   }catch(error){
+    return NextResponse.json(
+      { message: "Internal Error",error },
+      { status: 500 }
+    );
+  }
+
+}
+
+
