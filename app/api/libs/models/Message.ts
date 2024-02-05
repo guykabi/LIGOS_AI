@@ -1,13 +1,15 @@
 import mongoose,{Schema,Model} from 'mongoose' 
 
 
-type Service = 'Code' | 'Chat' | 'Image' | 'Video' | 'Music'
+export type Service = 'Code' | 'Chat' | 'Image' | 'Video' | 'Music'
 
-export interface MessageSchemaType extends Document{
+export type MessageType = {
   userId:string
   service:Service
   content:string
 }
+
+export interface MessageSchemaType extends Document,MessageType{}
 
 type MessageModel = Model<MessageSchemaType>
 
