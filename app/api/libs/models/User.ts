@@ -1,22 +1,22 @@
 import mongoose,{Schema,Model} from 'mongoose' 
 
 export type UserType = {
-  fullname:string, 
+  name:string, 
   email:string,
   password?:string,
   freeUses?:number,
   provider?:[string],
   premium?:boolean,
-  image?:string
+  image?:string | undefined
 }
 
 interface UserSchemaType extends Document, UserType{}
 
-type UserModel = Model<UserSchemaType>
+export type UserModel = Model<UserSchemaType>
 
 
 const UserSchema:Schema = new Schema<UserSchemaType,UserModel>({
-  fullname:String, 
+  name:String, 
   email:{type: String, required: true}, 
   password:String,
   freeUses:Number,
