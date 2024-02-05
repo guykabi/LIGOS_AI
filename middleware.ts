@@ -3,9 +3,9 @@ export {default} from 'next-auth/middleware'
 export const config = { matcher: [
   '/dashboard',
   '/chat',
-  '/videoGeneration',
-  '/imageGeneration',
-  '/musicGeneration',
-  '/codeGeneration',
+  '/video',
+  '/image',
+  '/music',
+  '/code',
   '/settings'
 ]}

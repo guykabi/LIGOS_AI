@@ -6,11 +6,17 @@ import {
   IoSettingsOutline } from "react-icons/io5";
 import { FiMusic } from "react-icons/fi";
 import { FaCode } from "react-icons/fa";
+import { Icon } from "next/dist/lib/metadata/types/metadata-types";
 
 
+export type Route = {
+   label:string,
+   icon: any,
+   href:string,
+   color:string
+}
 
-
-export const routes = [
+export const routes:Route[] = [
   {
    label:"Dashboard",
    icon: MdOutlineSpaceDashboard,
@@ -20,31 +26,31 @@ export const routes = [
   {
    label:"Chat",
    icon: IoChatbubblesOutline,
-   href:'/chat',
+   href:'/Chat',
    color:'blue'
   },
   {
    label:"Image Generation",
    icon: IoImagesOutline,
-   href:'/imageGeneration',
+   href:'/Image',
    color:'blue'
   },
   {
    label:"Video Generation",
    icon: IoVideocamOutline,
-   href:'/videoGeneration',
+   href:'/Video',
    color:'blue'
   },
   {
    label:"Music Generation",
    icon: FiMusic,
-   href:'/musicGeneration',
+   href:'/Music',
    color:'blue'
   },
   {
     label:"Code Generation",
     icon:FaCode ,
-    href:'/codeGeneration',
+    href:'/Code',
     color:'blue'
    },
    {
