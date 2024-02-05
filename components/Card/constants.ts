@@ -10,28 +10,28 @@ export const Cards = [
     title:'Chat',
     content:'Chat that allows you to ask any question',
     color:'blue',
-    href:'/chat',
+    href:'/Chat',
     icon:IoChatbubblesOutline
   },
   {
     title:'Image Generation',
     content:'Generate any image on your mind',
     color:'orange',
-    href:'/imageGeneration',
+    href:'/Image',
     icon:IoImagesOutline
   },
   {
     title:'Video Generation',
     content:'Instead of filming it, write it !',
     color:'green',
-    href:'/videoGeneration',
+    href:'/Video',
     icon:IoVideocamOutline
   },
   {
     title:'Music generation',
     content:'Like pro musician, just not',
     color:'red',
-    href:'/musicGeneration',
+    href:'/Music',
     icon:FiMusic
 
   },
@@ -39,7 +39,7 @@ export const Cards = [
     title:'Code',
     content:'Ask any code issue that comes to your mind',
     color:'gray',
-    href:'/codeGeneration',
+    href:'/Code',
     icon:FaCode
   } 
   
