@@ -34,7 +34,7 @@ if (useSession().data?.user) {
          </div>
          <div className={styles.signinLink}>         
           <Link href='/api/auth/signin'>
-            <p>Sign-In</p>
+            <p>Sign In</p>
           </Link>
          </div>
         </header>
