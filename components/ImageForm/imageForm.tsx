@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import {useRouter} from 'next/navigation'
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ImageType, ImageSchemaType } from "@/utils/types";
 import { imageFormSchema } from "@/utils/zod/schemas";
@@ -21,86 +21,92 @@ import { amountOptions, resolutionOptions } from "./constants";
 import SkeletonLoader from "../CardLoader/cardLoader";
 import { useSendImage } from "@/hooks/useSendImage";
 import { usePremiumModal } from "@/hooks/usePremiumModal";
-
-const allImages = [
-  {
-    url: "https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg",
-  },
-  {
-    url: "https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg",
-  },
-  {
-    url: "https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg",
-  },
-  {
-    url: "https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg",
-  },
-  {
-    url: "https://dfstudio-d420.kxcdn.com/wordpress/wp-content/uploads/2019/06/digital_camera_photo-1080x675.jpg",
-  },
-]
+import { ServiceContext } from "@/providers/contextProvider";
 
 
 const ImageForm = () => {
-  const [images, setImages] = useState<ImageType[]>(allImages);
-
-  const {refresh} = useRouter()
-  const {onOpen} = usePremiumModal()
+  const [images, setImages] = useState<ImageType[]>([]);
+  const { question, setQuestion } = useContext(ServiceContext);
+  const [lastSearch, setLastSearch] = useState<string | undefined>("");
+  const { refresh } = useRouter();
+  const { onOpen } = usePremiumModal();
 
   const {
-    data:newImage,
+    data: newImage,
     isSuccess,
     mutate: sendImage,
     error,
     isLoading,
   } = useSendImage();
 
-  const { register, handleSubmit, watch, control, reset } =
+  const { register, handleSubmit, watch, control, reset, getValues } =
     useForm<ImageSchemaType>({
+      defaultValues: {
+        prompt: "",
+        amount: "1",
+        resolution: "512x512",
+      },
       resolver: zodResolver(imageFormSchema),
     });
 
   const handleMessage = async (values: ImageSchemaType) => {
-    setImages([])
-    reset()
+    setImages([]);
+    setLastSearch(values.prompt);
     sendImage(values);
   };
 
+  useEffect(() => {
+    if (question.service !== "Image") return;
+
+    let body: ImageSchemaType = {
+      prompt: question.message,
+      amount: getValues("amount"),
+      resolution: getValues("resolution"),
+    };
+
+    handleMessage(body);
+    setQuestion({ service: undefined, message: "" });
+  }, [question]);
+
   const imagesContainer = (
     <>
-    {images?.length === 0 && !isLoading ? (
-      <div className={styles.imagesEmptyComponent}>
-        <Empty message="No images yet..." />
-      </div>
-    ):(
-    <div className={styles.images}>
-      {isLoading ? <SkeletonLoader amount={6} /> : null}
-      {!isLoading && images?.length
-        ? images.map((image) => <ImageCard key={image.url} src={image.url} />)
-        : null}
-    </div>)}
+      {images?.length === 0 && !isLoading ? (
+        <div className={styles.imagesEmptyComponent}>
+          <Empty message="No images yet..." />
+        </div>
+      ) : (
+        <div className={styles.images}>
+          {isLoading ? <SkeletonLoader amount={+getValues("amount")} /> : null}
+          {!isLoading && images?.length
+            ? images.map((image) => (
+                <ImageCard
+                  key={image.url}
+                  src={image.url}
+                  searchKey={lastSearch}
+                />
+              ))
+            : null}
+        </div>
+      )}
     </>
   );
 
+  useEffect(() => {
+    if (!newImage?.length) return;
 
-  useEffect(()=>{
+    const urls = newImage?.map(({ url }) => ({ url }));
+    setImages(urls);
+    reset();
+    refresh();
+  }, [isSuccess]);
 
-    if (!newImage?.length) return
-     
-      const urls = newImage?.map(({ url }) => ({ url }));
-      setImages(urls);
-      refresh()
-  },[isSuccess])
-
-  useEffect(()=>{
-    if (!error) return 
-    reset()
+  useEffect(() => {
+    if (!error) return;
+    reset();
 
     let res = ErrorHandler(error);
     if (res === "Premuim is required") onOpen();
-
-
-  },[error])
+  }, [error]);
 
   return (
     <div className={styles.imageFormWrapper}>
@@ -131,7 +137,6 @@ const ImageForm = () => {
               <Controller
                 name="amount"
                 control={control}
-                defaultValue="1"
                 rules={{ required: true }}
                 render={({ field }) => (
                   <Select {...field} labelId="amount-label" label="Amount">
@@ -152,7 +157,6 @@ const ImageForm = () => {
               <Controller
                 name="resolution"
                 control={control}
-                defaultValue="512x512"
                 rules={{ required: true }}
                 render={({ field }) => (
                   <Select {...field} label="Size" labelId="resolution-label">
@@ -165,7 +169,6 @@ const ImageForm = () => {
                 )}
               />
             </FormControl>
-            {/* <FormHelperText error={true}>{errors.level?.message}</FormHelperText> */}
           </Box>
         </div>
         <div className={styles.btnWrapper}>

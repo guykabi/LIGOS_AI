@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import {useRouter} from 'next/navigation'
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,12 +16,14 @@ import { SpinnerLoader } from "../SpinnerLoader.tsx/spinnerLoader";
 import Video from "./Video/video";
 import { useSendVideo } from "@/hooks/useSendVideo";
 import { usePremiumModal } from "@/hooks/usePremiumModal";
+import { ServiceContext } from "@/providers/contextProvider";
 
 
 
 const VideoForm = () => {
 
   const [videos, setVideo] = useState<VideoType[]>([]);
+  const {question,setQuestion} = useContext(ServiceContext)
   const {refresh} = useRouter()
   const {onOpen} = usePremiumModal()
 
@@ -49,7 +51,21 @@ const VideoForm = () => {
     setVideo([])
   };
 
-  const musicContainer = (
+
+  useEffect(()=>{
+    
+    if(question.service !== 'Chat') return
+
+    let body:FormSchemaType = {
+      content:question.message
+    }
+    
+    handleMessage(body)
+    setQuestion({service:undefined,message:''})
+  },[question])
+
+
+  const videoContainer = (
     <div className={styles.videos}>
       {isLoading ? <Loader text="Ligos is loading..." /> : null}
       {!videos?.length && !isLoading ? (
@@ -125,7 +141,7 @@ const VideoForm = () => {
           />
         </div>
       </form>
-      {musicContainer}
+      {videoContainer}
     </div>
   );
 };

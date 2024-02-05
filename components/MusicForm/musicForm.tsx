@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import {useRouter} from 'next/navigation'
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,10 +16,12 @@ import { SpinnerLoader } from "../SpinnerLoader.tsx/spinnerLoader";
 import { useSendMusic } from "@/hooks/useSendMusic";
 import Audio from "./Audio/audio";
 import { usePremiumModal } from "@/hooks/usePremiumModal";
+import { ServiceContext } from "@/providers/contextProvider";
 
 
 const MusicForm = () => {
   const [music, setMusic] = useState<MusicType[]>([]);
+  const {question,setQuestion} = useContext(ServiceContext)
   const {refresh} = useRouter()
   const {onOpen} = usePremiumModal()
 
@@ -46,6 +48,20 @@ const MusicForm = () => {
     sendMusic(message);
     setMusic([])
   };
+
+
+  useEffect(()=>{
+    
+    if(question.service !== 'Chat') return
+
+    let body:FormSchemaType = {
+      content:question.message
+    }
+    
+    handleMessage(body)
+    setQuestion({service:undefined,message:''})
+  },[question])
+
 
   const musicContainer = (
     <div className={styles.sounds}>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import {useRouter} from 'next/navigation'
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -15,37 +15,12 @@ import { ErrorHandler } from "../../utils/errorHandler";
 import { SpinnerLoader } from "../SpinnerLoader.tsx/spinnerLoader";
 import { useSendCode } from "@/hooks/useSendCode";
 import { usePremiumModal } from "@/hooks/usePremiumModal";
+import { ServiceContext } from "@/providers/contextProvider";
 
-
-const allMessages: MessageModel[] = [
-  { content: "efgegegergegegeg efkgneofgog efjon", role: "user" },
-  {
-    content:
-      "Here is an example: ```jsx import Markdown from '@/components/CodeForm/Markdown/markdown'; type MessageProps = {content: string;role: string;}; const Message = ({ content, role }: MessageProps) => {const { data: session } = useSession(); const pathname = usePathname(); return ( <> <div className={role === 'user' ? styles.userMessage : styles.message}> {role === 'user' ? ( <p> {session?.user?.image ? ( <Image alt='User Image' src={session?.user?.image} 20} height={20} style={{ borderRadius: '50%' }}/> ) : (  <RxAvatar size={20} /> )} </p> ) : (  <p>  <Image 20} height={20} alt='Ligos' src='/images/AI_LOGO.png'/> </p> )} <div className={styles.content}> {pathname.startsWith('/codeGeneration') ? (  <Markdown content={content} /> ) : (   <>{content}</> )} </div> </div> </> ); }; export default Message; ``` So got it ? `useState` than",
-    role: "system",
-  },
-  { content: "ecnejfvnnceojofrc4h4urf4rvv4urv4r", role: "user" },
-  {
-    content:
-      "ecnejfvnnceojofrc4h4urf4rvv4urv4r,ejfbbrff   f3jbibribf 3rijvb3irvrvbvbrvbin  3jovj3nrivn 3rjvn3rvirivbirbvbribv j3brvjibr",
-    role: "system",
-  },
-  { content: "ecnejfvnnceojofrc4h4urf4rvv4urv4r", role: "user" },
-  {
-    content:
-      "ecnejfvnnceojofrc4h4urf4rvv4urv4r,ejfbbrff   f3jbibribf 3rijvb3irvrvbvbrvbin  3jovj3nrivn 3rjvn3rvirivbirbvbribv j3brvjibr",
-    role: "system",
-  },
-  { content: "ecnejfvnnceojofrc4h4urf4rvv4urv4r", role: "user" },
-  {
-    content:
-      "ecnejfvnnceojofrc4h4urf4rvv4urv4r,ejfbbrff   f3jbibribf 3rijvb3irvrvbvbrvbin  3jovj3nrivn 3rjvn3rvirivbirbvbribv j3brvjibr",
-    role: "system",
-  },
-];
 
 const CodeForm = () => {
-  const [messages, setMessages] = useState<MessageModel[]>(allMessages);
+  const [messages, setMessages] = useState<MessageModel[]>([]);
+  const {question,setQuestion} = useContext(ServiceContext)
   const {onOpen} = usePremiumModal()
   const {refresh} = useRouter()
 
@@ -74,9 +49,23 @@ const CodeForm = () => {
     };
 
     const newMessages = [...messages, newMessage];
-    reset()
     sendCode(newMessages);
   };
+
+
+  useEffect(()=>{
+    
+    if(question.service !== 'Code') return
+
+    let body:MessageModel = {
+      content:question.message,
+      role:'user'
+    }
+    
+    handleMessage(body)
+    setQuestion({service:undefined,message:''})
+  },[question])
+
 
   
   const messageContainer = (
@@ -100,11 +89,14 @@ const CodeForm = () => {
   useEffect(()=>{
 
     if (!newMessage) return
+    
       let userMessage: MessageModel = {
         role: "user",
         content: getValues("content"),
       };
-      setMessages([...messages, userMessage, newMessage]);
+      
+      setMessages([...messages,newMessage,userMessage]);
+      reset()
       refresh()
   },[isSuccess])
 

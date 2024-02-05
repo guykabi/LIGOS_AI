@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormSchemaType, MessageModel } from "@/utils/types";
 import { formSchema } from "@/utils/zod/schemas";
-import { useSendMessage } from "@/hooks/useMessages/useSendMessage";
+import { useSendMessage } from "@/hooks/useSendMessage";
 import Button from "../Button/Button";
 import styles from "./chatForm.module.scss";
 import Empty from "../Empty/empty";
@@ -15,39 +15,15 @@ import Message from "./Message/message";
 import { ErrorHandler } from "../../utils/errorHandler";
 import { SpinnerLoader } from "../SpinnerLoader.tsx/spinnerLoader";
 import { usePremiumModal } from "@/hooks/usePremiumModal";
-import { useGetMessages } from "@/hooks/useMessages/useGetMessage";
+import { useGetMessages } from "@/hooks/useGetServiceMessages";
+import { ServiceContext } from "@/providers/contextProvider";
 
-const allMessages: MessageModel[] = [
-  { content: "ecnejfvnnceojofrc4h4urf4rvv4urv4r", role: "user" },
-  {
-    content:
-      "ecnejfvnnceojofrc4h4urf4rvv4urv4r,ejfbbrff   f3jbibribf 3rijvb3irvrvbvbrvbin  3jovj3nrivn 3rjvn3rvirivbirbvbribv j3brvjibr",
-    role: "system",
-  },
-  { content: "ecnejfvnnceojofrc4h4urf4rvv4urv4r", role: "user" },
-  {
-    content:
-      "ecnejfvnnceojofrc4h4urf4rvv4urv4r,ejfbbrff   f3jbibribf 3rijvb3irvrvbvbrvbin  3jovj3nrivn 3rjvn3rvirivbirbvbribv j3brvjibr",
-    role: "system",
-  },
-  { content: "ecnejfvnnceojofrc4h4urf4rvv4urv4r", role: "user" },
-  {
-    content:
-      "ecnejfvnnceojofrc4h4urf4rvv4urv4r,ejfbbrff   f3jbibribf 3rijvb3irvrvbvbrvbin  3jovj3nrivn 3rjvn3rvirivbirbvbribv j3brvjibr",
-    role: "system",
-  },
-  { content: "ecnejfvnnceojofrc4h4urf4rvv4urv4r", role: "user" },
-  {
-    content:
-      "ecnejfvnnceojofrc4h4urf4rvv4urv4r,ejfbbrff   f3jbibribf 3rijvb3irvrvbvbrvbin  3jovj3nrivn 3rjvn3rvirivbirbvbribv j3brvjibr",
-    role: "system",
-  },
-];
 
 const ChatForm = () => {
-  const [messages, setMessages] = useState<MessageModel[]>(allMessages);
+  const [messages, setMessages] = useState<MessageModel[]>([]);
   const { refresh } = useRouter();
   const { onOpen } = usePremiumModal();
+  const {question,setQuestion} = useContext(ServiceContext)
 
 
   const { register, handleSubmit, watch, getValues, reset } =
@@ -75,6 +51,20 @@ const ChatForm = () => {
     sendMessage(newMessages);
   };
 
+
+  useEffect(()=>{
+    
+    if(question.service !== 'Chat') return
+
+    let body:MessageModel = {
+      content:question.message,
+      role:'user'
+    }
+    
+    handleMessage(body)
+    setQuestion({service:undefined,message:''})
+  },[question])
+
   const messageContainer = (
     <div className={styles.messages}>
       {isLoading ? <Loader text="Ligos is loading..." /> : null}
@@ -95,15 +85,15 @@ const ChatForm = () => {
 
   useEffect(() => {
     if (!newMessage) return;
-
+    
     let userMessage: MessageModel = {
       role: "user",
       content: getValues("content"),
     };
 
+    
+    setMessages([...messages,newMessage,userMessage]);
     reset();
-
-    setMessages([...messages, userMessage, newMessage]);
     refresh();
   }, [isSuccess]);
 
