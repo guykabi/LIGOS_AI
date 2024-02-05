@@ -7,28 +7,18 @@ if (!DATABASE_URL) {
   throw new Error("Please define the DATABASE_URL environment variable inside .env.local");
 }
 
-let cached = global.mongoose;
-
-if (!cached) {
-  cached = global.mongoose = { conn: null, promise: null };
-}
+const connection = {} /* creating connection object*/
 
 async function connectDB() {
-  if (cached.conn) {
-    return cached.conn;
+  /* check if we have connection to our databse*/
+  if (connection.isConnected) {
+    return
   }
 
-  if (!cached.promise) {
-    const opts = {
-      bufferCommands: false,
-    };
+  /* connecting to our database */
+  const db = await mongoose.connect(DATABASE_URL)
 
-    cached.promise = await mongoose.connect(DATABASE_URL, opts).then((mongoose) => {
-      return mongoose;
-    });
-  }
-  cached.conn = await cached.promise;
-  return cached.conn;
+  connection.isConnected = db.connections[0].readyState
 }
 
 export default connectDB;
