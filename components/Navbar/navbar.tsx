@@ -8,6 +8,7 @@ import { MdLogout } from "react-icons/md";
 import { RxAvatar } from 'react-icons/rx'
 import { useRouter } from 'next/navigation'
 import FreeCounter from '../FreeCounter/freeCounter'
+import PremiumTag from '../PremiumTag/premiumTag'
 
 type NavbarProps = {
   freeUses:number
@@ -38,7 +39,8 @@ export const Navbar = ({freeUses}:NavbarProps) => {
         <p>{session? `${session?.user?.name}`:'Guest'}</p>
       </div>
       <div className={styles.freeCounterNavBar}>
-        <FreeCounter counter={freeUses} />
+        {session?.user.premium ? 
+          <PremiumTag/> : <FreeCounter counter={freeUses} />}
       </div>
       <div className={styles.signoutbtn} onClick={handleSignOut}>
           <MdLogout size={25}/>
