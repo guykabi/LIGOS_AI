@@ -1,8 +1,7 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import Replicate from 'replicate'
 import { checkFreeLimit, freeTrialIncrease } from "../libs/apiLimit";
-import Message from "../libs/models/Message";
-import { handleServerSession } from "../utils";
+import { getServiceMessages, handleInsertMessage, handleServerSession } from "../utils";
 
 const replicate = new Replicate({
   auth:process.env.REPLICATE_API_TOKEN
@@ -40,11 +39,12 @@ export async function POST(req:any,res:any){
       }
     );
 
-    await Message.create({
+
+    await handleInsertMessage(
       content,
-      userId:session?.user?.id,
-      service:'Music'
-    })
+      session?.user?.id,
+      'Music'
+    )
 
     if(!session?.user?.premium){
       await freeTrialIncrease(session.user.id)
@@ -53,6 +53,32 @@ export async function POST(req:any,res:any){
      return NextResponse.json(response)
      
   }catch(error){
-    return NextResponse.json({message:'Failed sending message',error},{status:500})
+    return NextResponse.json({message:'Internal Error',error},{status:500})
   }
 }
+
+
+
+export async function GET(req: NextRequest, res: NextResponse) {
+
+  try {
+    
+    const session = await handleServerSession(req,res)
+
+    if (!session) {
+      return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
+    }
+
+    const allMessages = await getServiceMessages(session.user.id,'Music')
+
+    return NextResponse.json(allMessages,{status:200});
+ 
+   }catch(error){
+    return NextResponse.json(
+      { message: "Internal Error",error },
+      { status: 500 }
+    );
+  }
+
+}
+
