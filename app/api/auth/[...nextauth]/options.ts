@@ -1,11 +1,13 @@
-import NextAuth, { DefaultUser, NextAuthOptions } from "next-auth";
+import NextAuth, { NextAuthOptions } from "next-auth";
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import connectDB from "../../libs/mongodb";
 import User from "../../libs/models/User";
+import {User as UserType} from '../../../../utils/types'
 import bcrypt from "bcrypt";
 import Axios from "../../api-instance";
+import { AxiosRequestConfig } from "axios";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -95,15 +97,15 @@ export const authOptions: NextAuthOptions = {
             return true;
           }
 
-          let body: any = {
-            name: user.name,
-            email: user.email,
+          let body: UserType = {
+            name: user.name!,
+            email: user.email!,
             freeUses: 0,
             premium: false,
             provider: [account.provider],
           };
 
-          const { data } = await Axios("/api/users", body);
+          const { data } = await Axios("/api/users", body as AxiosRequestConfig) ;
           user.id = data._id;
           return true;
         } catch (error) {
