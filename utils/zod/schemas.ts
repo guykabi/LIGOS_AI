@@ -18,7 +18,7 @@ export const signUpSchema = z
     name: z
       .string()
       .min(2, "At least 2 characters")
-      .max(20, "At most 20 characters"),
+      .max(14, "At most 14 characters"),
     email: z.string().email(),
     password: z.string().min(10, "Password needs to be at list 10 characters"),
     confirmPassword: z.string(),
@@ -42,7 +42,7 @@ export const detailsFormSchema = z.object({
   name: z
     .string()
     .min(2, "At least 2 characters")
-    .max(20, "At most 20 characters"),
+    .max(14, "At most 14 characters"),
   email: z.string().email(),
   image: z
     .any()
