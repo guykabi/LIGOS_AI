@@ -36,7 +36,7 @@ export const Navbar = ({freeUses}:NavbarProps) => {
              />:
             <RxAvatar size={20}/>}
         
-        <p>{session? `${session?.user?.name}`:'Guest'}</p>
+        <div className={styles.username}>{session? session.user.name :'Guest'}</div>
       </div>
       <div className={styles.freeCounterNavBar}>
         {session?.user.premium ? 
