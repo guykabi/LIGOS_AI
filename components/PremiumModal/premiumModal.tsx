@@ -2,18 +2,15 @@
 
 import React from "react";
 import styles from "./premiumModal.module.scss";
-import variable from "../../public/assets/styles/variables.module.scss";
-import Avatar from "@mui/material/Avatar";
 import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
 import DialogTitle from "@mui/material/DialogTitle";
 import Dialog from "@mui/material/Dialog";
-import { GrUpgrade } from "react-icons/gr";
 import { CiCircleCheck } from "react-icons/ci";
 import Chip from "@mui/material/Chip";
 
 import { usePremiumModal } from "@/hooks/usePremiumModal";
 import { Cards } from "../Card/constants";
+import UpgradeBtn from "../FreeCounter/UpgardeBtn/upgradeBtn";
 
 const PremiumModal = () => {
   const { onClose, isOpen } = usePremiumModal();
@@ -42,9 +39,7 @@ const PremiumModal = () => {
             </div>
           </div>
         ))}
-        <div className={styles.upgradeBtn}>
-          <button>UPGRADE</button>
-        </div>
+        <UpgradeBtn/>
       </List>
     </Dialog>
   );
