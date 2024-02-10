@@ -44,7 +44,6 @@ const MusicForm = () => {
   });
 
   const handleMessage = async (message: FormSchemaType) => {
-    reset()
     sendMusic(message);
     setMusic([])
   };
@@ -52,14 +51,13 @@ const MusicForm = () => {
 
   useEffect(()=>{
     
-    if(question.service !== 'Chat') return
+    if(question.service !== 'Music') return
 
     let body:FormSchemaType = {
       content:question.message
     }
     
     handleMessage(body)
-    setQuestion({service:undefined,message:''})
   },[question])
 
 
@@ -86,10 +84,12 @@ const MusicForm = () => {
     if(!newMusic)return
     
     let userMessage: MusicType = {
-      content: getValues("content"),
+      content: getValues("content") || question.message,
     };
 
     setMusic([...music, userMessage, newMusic]);
+    if(question.message) setQuestion({service:undefined,message:''})
+    reset()
     refresh()
     
   }, [isSuccess]);

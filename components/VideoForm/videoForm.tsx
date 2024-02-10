@@ -46,7 +46,6 @@ const VideoForm = () => {
   });
 
   const handleMessage = async (message: FormSchemaType) => {
-    reset()
     sendVideo(message);
     setVideo([])
   };
@@ -54,14 +53,13 @@ const VideoForm = () => {
 
   useEffect(()=>{
     
-    if(question.service !== 'Chat') return
+    if(question.service !== 'Video') return
 
     let body:FormSchemaType = {
       content:question.message
     }
     
     handleMessage(body)
-    setQuestion({service:undefined,message:''})
   },[question])
 
 
@@ -92,10 +90,12 @@ const VideoForm = () => {
     }
     
     let userMessage: VideoType = {
-      content: getValues("content"),
+      content: getValues("content") || question.message
     };
 
     setVideo([...videos, userMessage, newV]);
+    if(question.message) setQuestion({service:undefined,message:''})
+    reset()
     refresh()
   }, [isSuccess]);
 

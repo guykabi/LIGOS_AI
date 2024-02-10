@@ -63,7 +63,6 @@ const CodeForm = () => {
     }
     
     handleMessage(body)
-    setQuestion({service:undefined,message:''})
   },[question])
 
 
@@ -92,10 +91,11 @@ const CodeForm = () => {
     
       let userMessage: MessageModel = {
         role: "user",
-        content: getValues("content"),
+        content: getValues("content") || question.message,
       };
       
-      setMessages([...messages,newMessage,userMessage]);
+      setMessages([...messages,userMessage,newMessage]);
+      if(question.message) setQuestion({service:undefined,message:''})
       reset()
       refresh()
   },[isSuccess])

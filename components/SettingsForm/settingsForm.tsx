@@ -6,7 +6,7 @@ import { useSession } from "next-auth/react";
 import TextField from "@mui/material/TextField";
 import Image from "next/image";
 import Button from "../Button/Button";
-import { Button as Btn, IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
 import { Controller, useForm } from "react-hook-form";
 
 import { ACCEPTED_IMAGE_TYPES, detailsFormSchema } from "@/utils/zod/schemas";
@@ -200,6 +200,7 @@ const SettingsForm = () => {
           />
         </form>
       </div>
+      <div className={styles.middleLine}></div>
       <div className={styles.billingDetails}>
         <h3>Billing</h3>
         {session?.user.premium ? (
