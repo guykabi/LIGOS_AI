@@ -19,14 +19,20 @@
    transition: 0.4s;
    background-image: $button-colorful;
    color: white;
+   align-items: center;
+   justify-content: center;
 
 
    @media screen and (max-width: 869px){
-     width: 78%;
+     min-width: 5.2rem;
+     width: 80%;
      height: 1.8rem;
      font-size: small;
-     font-weight: bold;
-     padding: 2px;
+     font-weight: 600;
+
+     span{
+      display: none;
+     }
    }
 
    @media screen and (min-width: 869px){
@@ -34,6 +40,8 @@
      height: 3rem;
      font-size: medium;
      font-weight: bold;
+
+    
    }
   }
 

@@ -15,6 +15,7 @@ const inter = Inter({ subsets: ["latin"] });
 const montserrat = Montserrat({
   subsets: ["latin"],
   variable: "--font-montserrat",
+  display:'swap'
 });
 
 export const metadata: Metadata = {

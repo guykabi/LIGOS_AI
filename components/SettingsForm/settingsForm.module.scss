@@ -18,16 +18,15 @@
     overflow-y: scroll;
   }
 
-  .userDetails {
+   .userDetails {
     height: 100%;
     padding: 1rem;
     display: flex;
     flex-direction: column;
     gap: 2rem;
 
-    @media screen and (min-width: 969px) {
+    @media screen and (min-width: 969px)  {
       width: 55%;
-      border-right: 1px solid black;
     }
 
     @media screen and (max-width: 969px) {
@@ -73,6 +72,19 @@
     }
   }
 
+  .middleLine{
+
+    @media screen and (min-width: 969px) {
+      height:100%;
+      border-right:1px solid black;
+    }
+
+    @media screen and (max-width: 969px) {
+      display: none;
+    }
+  
+  }
+
   .billingDetails {
     margin: auto;
     display: flex;
@@ -87,6 +99,30 @@
 
     @media screen and (max-width: 969px) {
       width: 92%;
+    }
+
+    .premiumDetails{
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      height: 90%;
+      width: 90%;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+
+      p {
+        @media screen and (min-width: 969px) {
+          font-size: large;
+          font-weight: 600;
+        }
+
+        @media screen and (max-width: 969px) {
+          font-size: medium;
+          font-weight: 600;
+        }
+      }
     }
 
     .nonePremiumDetails {

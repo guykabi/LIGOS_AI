@@ -37,7 +37,7 @@
     align-items: center;
     justify-content: center;
     gap: 0.8rem;
-    padding: 0.2rem 1rem 0.2rem 1rem;
+    padding: 0.2rem 1rem 0.4rem 1rem;
 
     @media screen and (min-width: 869px) {
       width: 35rem;
@@ -71,38 +71,6 @@
       }
     }
 
-    .upgradeBtn {
-      width: 100%;
-      margin: 0 auto;
-      padding: 2% 2%;
-
-      button {
-        border: none;
-        border-radius: 0.4em;
-        cursor: pointer;
-        transition: 0.4s;
-        background-image: $button-colorful;
-        width: 100%;
-        color: white;
-
-        @media screen and (max-width: 869px) {
-          height: 1.8rem;
-          font-size: small;
-          font-weight: bold;
-          padding: 2px;
-        }
-
-        @media screen and (min-width: 869px) {
-          height: 3rem;
-          font-size: large;
-          letter-spacing: 1px;
-          font-weight: bold;
-        }
-      }
-
-      button:hover {
-        transform: scale(1.05);
-      }
-    }
+    
   }
 }

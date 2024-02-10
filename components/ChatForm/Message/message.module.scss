@@ -1,7 +1,7 @@
 @import '../../../public//assets/styles/variables.module.scss';
 
 .userMessage{
-
+   direction: ltr;
   @media screen and (max-width: 1000px){
     display: flex;
     flex-direction: row;
@@ -35,13 +35,13 @@
   .content{
     width: 90%;
     word-wrap: break-word;
-    text-align: left;
+    text-align: start;
   }
 
 }
 
 .message{
-  
+  direction: ltr;
   @media screen and (max-width: 1000px){
     position: relative;
     display: flex;
@@ -80,7 +80,7 @@
   .content{
     width:90%;
     word-wrap: break-word;
-    text-align: left;
+    text-align: start;
   }
 
 
