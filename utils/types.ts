@@ -67,6 +67,13 @@ export interface ServiceContextType {
 }
 
 
+export interface language {
+  value: string;
+  name: string;
+  direction: string;
+}
+
+
 
 
 
