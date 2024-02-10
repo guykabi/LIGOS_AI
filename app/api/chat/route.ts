@@ -84,7 +84,12 @@ export async function GET(req: NextRequest, res: NextResponse) {
     const allMessages = await getServiceMessages(session.user.id, "Chat");
 
     return NextResponse.json(allMessages, { status: 200 });
-  } catch (error) {
+  } catch (error:any){
+    
+    if(error?.status < 500){
+      return NextResponse.json({ message: error?.error?.message }, { status: error.status });
+    }
+    
     return NextResponse.json(
       { message: "Failed sending message", error },
       { status: 500 }

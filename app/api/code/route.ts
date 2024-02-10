@@ -63,7 +63,12 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     return NextResponse.json(response.choices[0].message);
 
-  } catch (error) {
+  } catch (error:any){
+    
+    if(error?.status < 500){
+      return NextResponse.json({ message: error?.error?.message }, { status: error.status });
+    }
+    
     return NextResponse.json({ message: "Internal Error" }, { status: 500 });
   }
 }

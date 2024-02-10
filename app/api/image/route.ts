@@ -5,6 +5,7 @@ import { checkFreeLimit, freeTrialIncrease } from "../libs/apiLimit";
 import Message from "../libs/models/Message";
 import { getServiceMessages, handleInsertMessage, handleServerSession } from "../utils";
 
+
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
@@ -61,7 +62,11 @@ export async function POST(req: NextRequest, res: NextResponse) {
 
     return NextResponse.json(response.data);
 
-  } catch (error) {
+  } catch (error:any){
+    
+    if(error?.status < 500){
+      return NextResponse.json({ message: error?.error?.message }, { status: error.status });
+    }
     return NextResponse.json({ message: "Internal Error",error }, { status: 500 });
   }
 }

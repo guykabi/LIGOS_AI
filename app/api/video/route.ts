@@ -53,7 +53,11 @@ export async function POST(req:any,res:any){
      
      return NextResponse.json(response)
      
-  }catch(error){
+  }catch(error:any){
+    
+    if(error.response.status < 500){
+      return NextResponse.json({ message: 'Unable to send request right now' }, { status: error.response.status });
+    }
     return NextResponse.json({message:'Failed sending message',error},{status:500})
   }
 }
