@@ -2,10 +2,11 @@
 
 import NetworkError from "@/components/NetworkError/networkError";
 import { useEffect, useState } from "react";
+import {Detector} from 'react-detect-offline'
 
 
 type Props = {
-  children: React.ReactNode;
+  children: any
 }
 
 const getOnLineStatus = () =>
@@ -14,31 +15,13 @@ const getOnLineStatus = () =>
         : true;
 
 export const NetworkStatus = ({children}:Props) => {
-  const [status, setStatus] = useState(getOnLineStatus());
-    
-  useEffect(() => {
-    function changeStatus() {
-      setStatus(window.navigator.onLine);
-    }
-    
-    window.addEventListener("online", changeStatus);
-    window.addEventListener("offline", changeStatus);
-    return () => {
-      window.removeEventListener("online", changeStatus);
-      window.removeEventListener("offline", changeStatus);
-    };
-  }, []);
-  
-
-   if(!status){
-    return (
-      <NetworkError/>
-    )
-   }
-
-  return(
+  return (
     <>
-     {children}
+      <Detector
+        render={({ online }) => (
+          online ? children : <NetworkError/>
+        )}
+/>
     </>
   )
 };
