@@ -13,9 +13,9 @@ import NotFound from "../not-found";
 async function DashboardLayout({ children }: { children: React.ReactNode }) {
 
   const session = await getServerSession(authOptions)
-
+  
   if(!session){
-    return <NotFound/>
+    return null
   }
 
   const freeUsesCount = await checkApiLimitCount(session.user.id)
