@@ -1,3 +1,5 @@
+'use client'
+
 import Link from "next/link";
 import "./not-found.css";
 import Button from "@/components/Button/Button";
