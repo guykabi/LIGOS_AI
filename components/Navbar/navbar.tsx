@@ -6,7 +6,6 @@ import {useSession} from 'next-auth/react'
 import Image from 'next/image'
 import { MdLogout } from "react-icons/md";
 import { RxAvatar } from 'react-icons/rx'
-import { useRouter } from 'next/navigation'
 import FreeCounter from '../FreeCounter/freeCounter'
 import PremiumTag from '../PremiumTag/premiumTag'
 
@@ -17,12 +16,11 @@ type NavbarProps = {
 export const Navbar = ({freeUses}:NavbarProps) => {
   
   const {data:session} = useSession()
-  const {push} = useRouter()
 
   const handleSignOut = async () =>{
-    await signOut({redirect:false})
-    push('/')
+    await signOut({callbackUrl:'/'})
   }
+
   return (
     <div className={styles.navbar}>
       <div className={styles.userDetails}>
