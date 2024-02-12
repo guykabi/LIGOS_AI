@@ -68,7 +68,7 @@ export const SignUpForm = () => {
       <div className={styles.innerWrapper}>
         <div className={styles.returnbtn}>
           <Link href={"/"}>
-            <FaArrowLeft size={20} />
+            <FaArrowLeft size={18} />
           </Link>
         </div>
         <header className={styles["form-header"]}>
@@ -80,7 +80,7 @@ export const SignUpForm = () => {
               {...register("name")}
               name="name"
               type="text"
-              placeholder="name"
+              placeholder="Name"
             />
             {errors.name ? <p>{errors.name.message}</p> : null}
 
