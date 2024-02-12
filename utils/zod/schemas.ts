@@ -10,7 +10,7 @@ export const ACCEPTED_IMAGE_TYPES = [
 
 export const signInSchema = z.object({
   email: z.string().email(),
-  password: z.string(),
+  password: z.string().min(10, "Password needs to be at list 10 characters"),
 });
 
 export const signUpSchema = z
