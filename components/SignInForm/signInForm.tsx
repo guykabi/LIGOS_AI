@@ -101,11 +101,7 @@ const SignInForm = () => {
           </div>
         </form>
         <div className={styles.divderLine}>
-        {isLoading || isSubmitting ? (
-              <SpinnerLoader size={20} color="black" />
-            ) : (
              <span>OR</span>
-            )}
         </div>
         <div className={styles.providersButtons}>
           <div className={styles.innerProvidersButtons}>
