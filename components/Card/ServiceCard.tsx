@@ -13,7 +13,7 @@ const ServiceCard = ({ title, content, color, href }: ServiceCard) => {
       </div>
       <div className={styles.iconWrapper}>
         <Link href={href} style={{color:`${color}`}}>
-          <FaRegArrowAltCircleRight size={25} />
+          <FaRegArrowAltCircleRight size={22} />
         </Link>
       </div>
     </div>
