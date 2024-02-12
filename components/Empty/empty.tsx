@@ -15,6 +15,7 @@ const Empty = ({message}:EmpryProps) => {
       width={250}
       height={250}
       alt='Empty'
+      priority={true}
       src={PersonSvg}/>
       <p>
         {message}

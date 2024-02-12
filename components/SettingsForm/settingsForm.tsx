@@ -51,14 +51,12 @@ const SettingsForm = () => {
     const formData = new FormData();
 
     if (getValues("image").name) {
-      
       for (let key in data) {
         formData.append(key, data[key as keyof DetailsSchemaType]);
       }
       sendDetails(formData);
       setPreviewImage(null);
-    }
-    else{
+    } else {
       delete data.image;
       for (let key in data) {
         formData.append(key, data[key as keyof DetailsSchemaType]);
@@ -75,7 +73,7 @@ const SettingsForm = () => {
   useEffect(() => {
     if (!newDetails) return;
 
-    reset()
+    reset();
     update({ name: newDetails?.name, image: newDetails?.image });
   }, [isSuccess]);
 
@@ -106,6 +104,8 @@ const SettingsForm = () => {
             ) : null}
             <Image
               alt="user image"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              priority={true}
               src={
                 previewImage
                   ? previewImage
