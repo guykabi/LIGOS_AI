@@ -59,7 +59,7 @@ const SideBarCard = ({ route, path }: SideBarCardProps) => {
         ) : null}
         {isRefetching && route.href === path && !rule ? (
           <div className={styles.loader}>
-            <SpinnerLoader color="white" size={20} />
+            <SpinnerLoader color="white" size={16} />
           </div>
         ) : null}
       </div>
