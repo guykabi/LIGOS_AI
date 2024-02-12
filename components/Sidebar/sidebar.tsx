@@ -12,33 +12,37 @@ import { useSession } from "next-auth/react";
 import PremiumTag from "../PremiumTag/premiumTag";
 
 type SideBarProps = {
-  freeUses:number
-}
+  freeUses: number;
+};
 
-function Sidebar({freeUses}:SideBarProps) {
+function Sidebar({ freeUses }: SideBarProps) {
   const pathname = usePathname();
-  const {data:session} = useSession()
-  
+  const { data: session } = useSession();
 
   return (
     <div className={styles.sidebar}>
       <div className={styles.innersidebar}>
-        
         <Link href="/dashboard" className={styles.link}>
           <div className={styles.logoWrapper}>
             <Image fill src="/images/AI_LOGO.png" alt="Logo" />
           </div>
-          <h2>Ligos</h2>
+          <h2>LIGOS</h2>
         </Link>
-        
+        <main className={styles.mainSideBar}>
+
         <div className={styles.routesWrapper}>
           {routes.map((route) => (
-            <SideBarCard key={route.href} route={route} path={pathname}/>
+            <SideBarCard key={route.href} route={route} path={pathname} />
           ))}
         </div>
         <div className={styles.freeUses}>
-          {session?.user.premium ? <PremiumTag/> : <FreeCounter counter={freeUses}/>}
+          {session?.user.premium ? (
+            <PremiumTag />
+          ) : (
+            <FreeCounter counter={freeUses} />
+          )}
         </div>
+        </main>
       </div>
     </div>
   );
