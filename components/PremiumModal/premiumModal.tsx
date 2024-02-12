@@ -23,9 +23,10 @@ const PremiumModal = () => {
       sx={{
         backdropFilter: "blur(5px)",
       }}
+      PaperProps={{ sx: { borderRadius: "0.8em" } }}
     >
       <DialogTitle className={styles.dialogHeader}>
-        Upgrade to LIGOS <Chip label="PREMIUM" className={styles.chip} />
+        <span>Upgrade to LIGOS</span> <Chip label="PREMIUM" className={styles.chip} />
       </DialogTitle>
       <List className={styles.listWrapper}>
         {Cards.map((card) => (
