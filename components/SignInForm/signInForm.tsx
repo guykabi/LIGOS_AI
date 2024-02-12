@@ -20,7 +20,7 @@ const SignInForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { isSubmitting },
+    formState: { isSubmitting,errors },
     reset,
   } = useForm<signInSchemaType>({
     resolver: zodResolver(signInSchema),
@@ -29,11 +29,12 @@ const SignInForm = () => {
   const handleCredentialsSignIn = async ({ email, password }: FieldValues) => {
     let res = await signIn("credentials", {
       callbackUrl: "/dashboard",
-      redirect: true,
+      redirect:true,
       email,
       password,
     });
-    
+
+
     reset();
 
     if (res?.error) {
@@ -45,7 +46,7 @@ const SignInForm = () => {
     setIsLoading(true);
     const res = await signIn(provider, {
       callbackUrl: "/dashboard",
-      redirect: false,
+      redirect: true,
     });
     setIsLoading(false);
 
@@ -64,7 +65,7 @@ const SignInForm = () => {
     <div className={styles.signInWrapper}>
       <div className={styles.returnBtn}>
         <Link href={"/"}>
-          <FaArrowLeft size={25} />
+          <FaArrowLeft size={18} />
         </Link>
       </div>
       <div className={styles.innerWrapper}>
@@ -78,12 +79,14 @@ const SignInForm = () => {
           className={styles.credentialsForm}
         >
           <input {...register("email")} name="email" placeholder="Email" />
+          {errors.email ? <span style={{color:'red'}}>{errors.email.message}</span>:null}
           <input
             {...register("password")}
             name="password"
             placeholder="Password"
             type="password"
           />
+          {errors.password ? <span style={{color:'red'}}>{errors.password.message}</span>:null}
           <div className={styles.submitBtn}>
             <Button
               theme="black"
@@ -99,9 +102,9 @@ const SignInForm = () => {
         </form>
         <div className={styles.divderLine}>
         {isLoading || isSubmitting ? (
-              <SpinnerLoader size={30} color="black" />
+              <SpinnerLoader size={20} color="black" />
             ) : (
-              "OR"
+             <span>OR</span>
             )}
         </div>
         <div className={styles.providersButtons}>
