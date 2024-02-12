@@ -12,10 +12,9 @@ const UpgradeBtn = () => {
     <div className={styles.upgradeBtn}>
     <button onClick={onOpen}>
       UPGRADE 
-      &nbsp;
-      <span>
+      <p>
        <FaAngleDoubleUp size={16}/>
-      </span>
+      </p>
     </button>
   </div>
   )
