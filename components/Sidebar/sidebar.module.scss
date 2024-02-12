@@ -16,7 +16,7 @@
       padding: 5px;
       display: flex;
       flex-direction: column;
-      gap: 2rem;
+      gap: 25px;
       height: 100%;
 
       .link {
@@ -25,7 +25,7 @@
         width: 100%;
         display: flex;
         flex-direction: row;
-        gap: 1rem;
+        gap: 5px;
 
         .logoWrapper {
           position: relative;
@@ -39,7 +39,7 @@
         margin: 0 auto;
         display: flex;
         flex-direction: column;
-        gap: 15px;
+        gap: 10px;
         width: 100%;
 
         .routeLink {
@@ -82,7 +82,6 @@
       }
 
       .freeUses {
-        // position: absolute;
         width: 100%;
         bottom: 0;
         margin: auto;

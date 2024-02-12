@@ -28,16 +28,15 @@
 
   .innerWrapper {
     position: relative;
-
-    @media screen and (max-width: 1000px) {
+    @media screen and (max-width: 880px) {
       width: 90%;
-      height: 60%;
+      height: fit-content; 
     }
 
-    @media screen and (min-width: 1000px) {
+    @media screen and (min-width: 880px) {
       width: 45%;
-      height: 80%;
-    }
+      height: fit-content; 
+     }
     margin: auto;
     display: flex;
     flex-direction: column;
@@ -50,22 +49,22 @@
     text-align: center;
 
     .header {
-      @media screen and (max-width: 1000px) {
+      @media screen and (max-width: 880px) {
         width: 100%;
       }
 
-      @media screen and (min-width: 1000px) {
+      @media screen and (min-width: 880px) {
         width: 75%;
       }
 
     }
 
     .credentialsForm {
-      @media screen and (max-width: 1000px) {
+      @media screen and (max-width: 880px) {
         width: 100%;
       }
 
-      @media screen and (min-width: 1000px) {
+      @media screen and (min-width: 880px) {
         width: 75%;
       }
 
@@ -78,11 +77,11 @@
       align-items: center;
 
       input {
-        @media screen and (max-width: 1000px) {
+        @media screen and (max-width: 880px) {
           width: 100%;
         }
 
-        @media screen and (min-width: 1000px) {
+        @media screen and (min-width: 880px) {
           width: 80%;
         }
 
@@ -94,12 +93,16 @@
         font-size: medium;
       }
 
+      input::placeholder{
+        font-size: small;
+      }
+
       .submitBtn {
-        @media screen and (max-width: 1000px) {
+        @media screen and (max-width: 880px) {
           width: 100%;
         }
 
-        @media screen and (min-width: 1000px) {
+        @media screen and (min-width: 880px) {
           width: 80%;
         }
         margin: auto;
@@ -107,12 +110,16 @@
     }
 
     .divderLine {
-      @media screen and (max-width: 1000px) {
+      @media screen and (max-width: 880px) {
         width: 90%;
       }
 
-      @media screen and (min-width: 1000px) {
+      @media screen and (min-width: 880px) {
         width: 50%;
+      }
+
+      span{
+        font-size: small;
       }
       text-align: center;
       font-size: 16px;
@@ -123,22 +130,22 @@
     }
 
     .providersButtons {
-      @media screen and (max-width: 1000px) {
+      @media screen and (max-width: 880px) {
         width: 100%;
       }
 
-      @media screen and (min-width: 1000px) {
+      @media screen and (min-width: 880px) {
         width: 75%;
       }
 
       margin: 0 auto;
 
       .innerProvidersButtons {
-        @media screen and (max-width: 1000px) {
+        @media screen and (max-width: 880px) {
           width: 100%;
         }
 
-        @media screen and (min-width: 1000px) {
+        @media screen and (min-width: 880px) {
           width: 80%;
         }
         height: fit-content;

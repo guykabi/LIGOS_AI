@@ -184,3 +184,33 @@
     }
   }
 }
+
+@media screen and (min-width: 800px) {
+  .settingsWrapper::-webkit-scrollbar{
+    width:22px;
+    border-radius:10px ;
+    border:0.2px solid rgba(72, 92, 110, 0.1);
+    background-color:#f1f1f1;
+  }
+  .settingsWrapper::-webkit-scrollbar-track{
+    background: #ffffff;
+    border: none;
+    // border: 0.2px solid rgba(72, 92, 110, 0.5);
+    // border-radius: 10px;
+  }
+  .settingsWrapper::-webkit-scrollbar-thumb{
+    background-color: #b0b0b0;
+    border: 8px solid transparent;
+    background-clip: padding-box;
+    border-radius: 10px;
+    width:8px;
+    height:64px;
+  }
+  
+}
+
+@media screen and (max-width: 800px) {
+  .settingsWrapper::-webkit-scrollbar{
+    display: none;
+  }
+}

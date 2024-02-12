@@ -88,7 +88,7 @@
       position: absolute;
       top: 0;
       left: 0;
-      padding: 10px;
+      padding: 28px 10px ;
       cursor: pointer;
       transition: 0.2s;
     }
@@ -100,7 +100,6 @@
     .form-header{
       font-size: 200%;
       font-weight: 600;
-      
     }
 
     .form{
@@ -117,8 +116,15 @@
 
 
       input{
+
+        @media screen and (min-width: 910px){
+          width:60%;
+        }
+        
+        @media screen and (max-width: 910px){
+          width:80%;
+        }
         margin: 0 auto;
-        width:60%;
         min-width: 5rem;
         height: 3rem;
         font-size: large;
@@ -135,9 +141,19 @@
       }
     }
 
+    input::placeholder{
+      font-size: medium;
+    }
+
     .submitBtn{
       margin: auto;
-      width: 60%;
+      @media screen and (min-width: 910px){
+        width:60%;
+      }
+      
+      @media screen and (max-width: 910px){
+        width:80%;
+      }
     }
    }
   }
