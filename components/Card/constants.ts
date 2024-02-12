@@ -8,28 +8,28 @@ import { FaCode } from "react-icons/fa";
 export const Cards = [
   {
     title:'Chat',
-    content:'Chat that allows you to ask any question',
+    content:'Ask anything on your mind',
     color:'blue',
     href:'/Chat',
     icon:IoChatbubblesOutline
   },
   {
     title:'Image Generation',
-    content:'Generate any image on your mind',
+    content:'Generate any image you want!',
     color:'orange',
     href:'/Image',
     icon:IoImagesOutline
   },
   {
     title:'Video Generation',
-    content:'Instead of filming it, write it !',
+    content:'Instead of filming it, write it!',
     color:'green',
     href:'/Video',
     icon:IoVideocamOutline
   },
   {
     title:'Music generation',
-    content:'Like pro musician, just not',
+    content:'Like pro musician, but not',
     color:'red',
     href:'/Music',
     icon:FiMusic
@@ -37,7 +37,7 @@ export const Cards = [
   },
   {
     title:'Code',
-    content:'Ask any code issue that comes to your mind',
+    content:'Leave code to the professional',
     color:'gray',
     href:'/Code',
     icon:FaCode
