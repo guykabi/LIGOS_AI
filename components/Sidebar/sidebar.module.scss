@@ -35,57 +35,69 @@
         }
       }
 
-      .routesWrapper {
-        margin: 0 auto;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        width: 100%;
+      .mainSideBar {
+       position: relative;
+       height: 100%;
+       display: flex;
+       flex-direction: column;
+       justify-content:space-between; 
+       padding-top: 2%;
 
-        .routeLink {
+
+        .routesWrapper {
+          margin: 0 auto;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
           width: 100%;
-          justify-content: flex-start;
-          border-radius: 0.4em;
-          padding: 10px;
-          cursor: pointer;
-          transition: 0.4s;
+          height: 50%;
 
-          .routeLabel {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            gap: 10px;
-            font-weight: 500;
+          .routeLink {
+            width: 100%;
+            height: 100%;
+            justify-content: flex-start;
+            border-radius: 0.4em;
+            padding: 10px;
+            cursor: pointer;
+            transition: 0.4s;
+
+            .routeLabel {
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              gap: 10px;
+              font-weight: 500;
+            }
+          }
+
+          .routeLink:hover {
+            background-color: rgba(255, 255, 255, 0.368);
+          }
+
+          .routerLinkActive {
+            width: 100%;
+            justify-content: flex-start;
+            border-radius: 0.4em;
+            padding: 10px;
+            cursor: pointer;
+            background-color: rgba(255, 255, 255, 0.368);
+
+            .routeLabel {
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              gap: 10px;
+              font-weight: 500;
+            }
           }
         }
 
-        .routeLink:hover {
-          background-color: rgba(255, 255, 255, 0.368);
-        }
-
-        .routerLinkActive {
+        .freeUses {
           width: 100%;
-          justify-content: flex-start;
-          border-radius: 0.4em;
-          padding: 10px;
-          cursor: pointer;
-          background-color: rgba(255, 255, 255, 0.368);
-
-          .routeLabel {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            gap: 10px;
-            font-weight: 500;
-          }
+          bottom: 0;
+          margin: 0 auto;
+          font-weight: 600;
         }
-      }
-
-      .freeUses {
-        width: 100%;
-        bottom: 0;
-        margin: auto;
-        font-weight: 600;
       }
     }
   }

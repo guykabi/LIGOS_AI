@@ -34,7 +34,7 @@
     }
 
     @media screen and (min-width: 880px) {
-      width: 45%;
+      width: 40%;
       height: fit-content; 
      }
     margin: auto;
@@ -43,8 +43,8 @@
     justify-content: space-between;
     align-items: center;
     box-shadow: $shadow-bolder;
-    padding: 1rem;
-    border-radius: 0.5em;
+    padding: 2rem;
+    border-radius: 2em;
     background-color: white;
     text-align: center;
 
@@ -54,7 +54,7 @@
       }
 
       @media screen and (min-width: 880px) {
-        width: 75%;
+        width: 80%;
       }
 
     }
@@ -65,7 +65,7 @@
       }
 
       @media screen and (min-width: 880px) {
-        width: 75%;
+        width: 80%;
       }
 
       height: fit-content;
@@ -135,7 +135,7 @@
       }
 
       @media screen and (min-width: 880px) {
-        width: 75%;
+        width: 80%;
       }
 
       margin: 0 auto;
