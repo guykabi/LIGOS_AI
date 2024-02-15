@@ -1,0 +1,12 @@
+version: "3.8"
+services:
+  ligos:
+    container_name: ligos
+    build: .
+    image: ligos_prod
+    restart: unless-stopped
+    env_file: .env.local
+    environment:
+      - NODE_ENV=production
+    ports:
+      - "3000:3000"
