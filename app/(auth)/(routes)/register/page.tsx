@@ -1,12 +1,12 @@
 import React from 'react'
-import { SignUpForm } from '@/components/SignUpForm/signUnForm'
+import { SignUpForm } from '@/components/SignUpForm/signUpForm'
 
 
 function Signup() {
   return (
-    <div>
+    <>
       <SignUpForm/>
-    </div>
+    </>
   )
 }
 
