@@ -15,7 +15,7 @@
      width: 40%;
     }
 
-    @media screen and (max-width: 910px){
+    @media screen and (max-width: 750px){
       display: none;
     }
     background-color: rgb(255, 255, 255);
@@ -39,9 +39,9 @@
 
     .sideText{
 
-       width: 100%;
+       width: 80%;
        min-width: fit-content;
-       font-size: xx-large;
+       font-size: 26px;
        margin:auto;
        font-weight: 700;
        z-index: 1;
@@ -127,10 +127,10 @@
         margin: 0 auto;
         min-width: 5rem;
         height: 3rem;
-        font-size: large;
+        font-size: 15px;
         padding: 0.5rem;
-        border-radius: 0.2em;
-        border: 2.5px solid black;
+        border-radius: 0.4em;
+        border: 2px lightgray solid;
       }
 
       p{
@@ -142,7 +142,7 @@
     }
 
     input::placeholder{
-      font-size: medium;
+      font-size: small;
     }
 
     .submitBtn{
