@@ -1,5 +1,5 @@
 
-import React, { useEffect } from "react";
+import React from "react";
 import styles from "./layout.module.scss";
 import Sidebar from "@/components/Sidebar/sidebar";
 import { Navbar } from "@/components/Navbar/navbar";
@@ -7,7 +7,6 @@ import SidebarMobile from "@/components/SidebarMobile/sidebarMobile";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/options";
 import { checkApiLimitCount } from "../api/libs/apiLimit";
-import NotFound from "../not-found";
 
 
 async function DashboardLayout({ children }: { children: React.ReactNode }) {
