@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import {useRouter} from 'next/navigation'
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -17,6 +17,7 @@ import { useSendMusic } from "@/hooks/useSendMusic";
 import Audio from "./Audio/audio";
 import { usePremiumModal } from "@/hooks/usePremiumModal";
 import { ServiceContext } from "@/providers/contextProvider";
+import useScrollToView from "@/hooks/useScrollToView";
 
 
 const MusicForm = () => {
@@ -24,6 +25,10 @@ const MusicForm = () => {
   const {question,setQuestion} = useContext(ServiceContext)
   const {refresh} = useRouter()
   const {onOpen} = usePremiumModal()
+  const musicRef = useRef<HTMLDivElement>(null)
+
+  useScrollToView(musicRef,music)
+
 
   const {
     mutate: sendMusic,
@@ -70,14 +75,16 @@ const MusicForm = () => {
       {!isLoading && music?.length
         ? music.map((m) =>
             m.audio ? (
-              <Audio audio={m.audio} />
+              <Audio key={m.spectrogram} audio={m.audio} />
             ) : (
               <Message key={m.content} content={m.content!} role="user" />
             )
           )
         : null}
+        <div ref={musicRef}></div>
     </div>
   );
+
 
   useEffect(() => {
 
@@ -106,7 +113,10 @@ const MusicForm = () => {
   return (
     <div className={styles.musicFormWrapper}>
       <form className={styles.form} onSubmit={handleSubmit(handleMessage)}>
-        <div className={styles.inputWrapper}>
+        <div
+          role="textbox" 
+          aria-describedby="Input of the music service"
+         className={styles.inputWrapper}>
           <input
             {...register("content")}
             name="content"

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -15,8 +15,9 @@ import Message from "./Message/message";
 import { ErrorHandler } from "../../utils/errorHandler";
 import { SpinnerLoader } from "../SpinnerLoader.tsx/spinnerLoader";
 import { usePremiumModal } from "@/hooks/usePremiumModal";
-import { useGetMessages } from "@/hooks/useGetServiceMessages";
 import { ServiceContext } from "@/providers/contextProvider";
+import useScrollToView from "@/hooks/useScrollToView";
+
 
 
 const ChatForm = () => {
@@ -24,13 +25,16 @@ const ChatForm = () => {
   const { refresh } = useRouter();
   const { onOpen } = usePremiumModal();
   const {question,setQuestion} = useContext(ServiceContext)
+  const messagesRef = useRef<HTMLDivElement>(null)
 
-
+  
+  useScrollToView(messagesRef,messages)
+  
   const { register, handleSubmit, watch, getValues, reset } =
-    useForm<FormSchemaType>({
-      resolver: zodResolver(formSchema),
-    });
-
+  useForm<FormSchemaType>({
+    resolver: zodResolver(formSchema)
+  });
+  
     
   const {
     mutate: sendMessage,
@@ -43,11 +47,11 @@ const ChatForm = () => {
   const handleMessage = async (message: FormSchemaType) => {
     const newMessage: MessageModel = {
       role: "user",
-      content: message.content,
+      content: message.content
     };
 
     const newMessages = [...messages, newMessage];
-
+    
     sendMessage(newMessages);
   };
 
@@ -64,6 +68,8 @@ const ChatForm = () => {
     handleMessage(body)
   },[question])
 
+
+
   const messageContainer = (
     <div className={styles.messages}>
       {isLoading ? <Loader text="Ligos is loading..." /> : null}
@@ -79,8 +85,11 @@ const ChatForm = () => {
             />
           ))
         : null}
+          <div ref={messagesRef} />
     </div>
   );
+
+
 
   useEffect(() => {
     if (!newMessage) return;
@@ -97,6 +106,7 @@ const ChatForm = () => {
     refresh();
   }, [isSuccess]);
 
+
   useEffect(() => {
     if (!error) return;
     reset();
@@ -109,7 +119,10 @@ const ChatForm = () => {
   return (
     <div className={styles.chatFormWrapper}>
       <form className={styles.form} onSubmit={handleSubmit(handleMessage)}>
-        <div className={styles.inputWrapper}>
+        <div
+        role="textbox" 
+        aria-describedby="Input of the chat service"
+         className={styles.inputWrapper}>
           <input
             {...register("content")}
             name="content"

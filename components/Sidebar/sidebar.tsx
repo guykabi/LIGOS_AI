@@ -20,7 +20,11 @@ function Sidebar({ freeUses }: SideBarProps) {
   const { data: session } = useSession();
 
   return (
-    <div className={styles.sidebar}>
+    <div 
+    className={styles.sidebar}
+    role="navigation" 
+    aria-describedby="A navigation element for the entire app"
+    >
       <div className={styles.innersidebar}>
         <Link href="/dashboard" className={styles.link}>
           <div className={styles.logoWrapper}>

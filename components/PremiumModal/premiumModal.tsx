@@ -17,6 +17,8 @@ const PremiumModal = () => {
 
   return (
     <Dialog
+      role="dialog" 
+      aria-describedby="A dialog of upgrade to premium account"
       onClose={onClose}
       open={isOpen}
       className={styles.dialog}

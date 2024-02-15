@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState,useRef } from "react";
 import { useForm } from "react-hook-form";
 import {useRouter} from 'next/navigation'
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,13 +16,17 @@ import { SpinnerLoader } from "../SpinnerLoader.tsx/spinnerLoader";
 import { useSendCode } from "@/hooks/useSendCode";
 import { usePremiumModal } from "@/hooks/usePremiumModal";
 import { ServiceContext } from "@/providers/contextProvider";
+import useScrollToView from "@/hooks/useScrollToView";
 
 
 const CodeForm = () => {
   const [messages, setMessages] = useState<MessageModel[]>([]);
   const {question,setQuestion} = useContext(ServiceContext)
+  const messagesRef = useRef<HTMLDivElement>(null)
   const {onOpen} = usePremiumModal()
   const {refresh} = useRouter()
+
+  useScrollToView(messagesRef,messages)
 
   const {
     mutate: sendCode,
@@ -82,8 +86,11 @@ const CodeForm = () => {
             />
           ))
         : null}
+        <div ref={messagesRef} />
     </div>
   );
+
+
 
   useEffect(()=>{
 
@@ -114,7 +121,10 @@ const CodeForm = () => {
   return (
     <div className={styles.codeFormWrapper}>
       <form className={styles.form} onSubmit={handleSubmit(handleMessage)}>
-        <div className={styles.inputWrapper}>
+        <div
+          role="textbox" 
+          aria-describedby="Input of the code service"
+         className={styles.inputWrapper}>
           <input
             {...register("content")}
             name="content"

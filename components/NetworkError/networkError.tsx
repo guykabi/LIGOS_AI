@@ -5,7 +5,10 @@ import { FiWifiOff } from "react-icons/fi";
 
 const NetworkError = () => {
   return (
-    <div className={styles.newWorkErrorWrapper}>
+    <div
+    role="alert"
+    aria-describedby="An alert on no internet connection"
+     className={styles.newWorkErrorWrapper}>
       <h2>You are offline, <br/> check your connection !</h2>
       <p>
         <FiWifiOff size={30}/>

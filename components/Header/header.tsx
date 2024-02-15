@@ -10,7 +10,10 @@ type HeaderProps = {
 
 const Header = ({title,description,icon,color}:HeaderProps) => {
   return (
-    <div className={styles.headerWrapper}>
+    <div
+    role="status"
+    aria-describedby={`A header section for ${title}`}
+     className={styles.headerWrapper}>
       <div className={styles.headerIcon} style={{color:`${color}`}}>
         {icon}
       </div>

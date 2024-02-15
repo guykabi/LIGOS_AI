@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import {useRouter} from 'next/navigation'
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -17,6 +17,7 @@ import Video from "./Video/video";
 import { useSendVideo } from "@/hooks/useSendVideo";
 import { usePremiumModal } from "@/hooks/usePremiumModal";
 import { ServiceContext } from "@/providers/contextProvider";
+import useScrollToView from "@/hooks/useScrollToView";
 
 
 
@@ -26,6 +27,9 @@ const VideoForm = () => {
   const {question,setQuestion} = useContext(ServiceContext)
   const {refresh} = useRouter()
   const {onOpen} = usePremiumModal()
+  const videosRef = useRef<HTMLDivElement>(null)
+
+  useScrollToView(videosRef,videos)
 
   const {
     mutate: sendVideo,
@@ -72,14 +76,17 @@ const VideoForm = () => {
       {!isLoading && videos?.length
         ? videos.map((m) =>
             m.src ? (
-              <Video src={m.src} />
+              <Video key={m.src} src={m.src} />
             ) : (
               <Message key={m.content} content={m.content!} role="user" />
             )
           )
         : null}
+        <div ref={videosRef}></div>
     </div>
   );
+
+  
 
   useEffect(() => {
 
@@ -111,7 +118,10 @@ const VideoForm = () => {
   return (
     <div className={styles.videoFormWrapper}>
       <form className={styles.form} onSubmit={handleSubmit(handleMessage)}>
-        <div className={styles.inputWrapper}>
+        <div
+          role="textbox" 
+          aria-describedby="Input of the video service"
+         className={styles.inputWrapper}>
           <input
             {...register("content")}
             name="content"
@@ -147,3 +157,4 @@ const VideoForm = () => {
 };
 
 export default VideoForm;
+

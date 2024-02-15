@@ -8,7 +8,7 @@ type CardLoaderProps = {
 const SkeletonLoader = ({amount}:CardLoaderProps) => {
   return (
     Array(amount).fill(1).map((card,index)=>(
-      <Skeleton sx={{width:'100%', height:'260px', borderRadius:'0.4em'}} variant="rectangular"/>
+      <Skeleton key={index} sx={{width:'100%', height:'260px', borderRadius:'0.4em'}} variant="rectangular"/>
     ))
   )
 }

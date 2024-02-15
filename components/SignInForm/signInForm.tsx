@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import styles from "./signInForm.module.scss";
 import Button from "../Button/Button";
 import Link from "next/link";
@@ -16,53 +17,66 @@ import { SpinnerLoader } from "../SpinnerLoader.tsx/spinnerLoader";
 const SignInForm = () => {
   const [isError, setIsError] = useState<string | undefined>();
   const [isLoading, setIsLoading] = useState(false);
+  //Preventing a after click on one of the submit buttons
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const { push } = useRouter();
 
   const {
     register,
     handleSubmit,
-    formState: { isSubmitting,errors },
+    formState: { isSubmitting, errors },
     reset,
   } = useForm<signInSchemaType>({
-    resolver: zodResolver(signInSchema),
+    resolver: zodResolver(signInSchema)
   });
 
   const handleCredentialsSignIn = async ({ email, password }: FieldValues) => {
     let res = await signIn("credentials", {
-      callbackUrl: "/dashboard",
-      redirect:true,
+      redirect: false,
       email,
       password,
     });
 
-
-    reset();
-
     if (res?.error) {
       setIsError(res.error);
+      return;
     }
+
+    setIsLoggedIn(true);
+    reset();
+    push("/dashboard");
   };
 
   const handleProvidersSignIn = async (provider: string) => {
     setIsLoading(true);
+
     const res = await signIn(provider, {
       callbackUrl: "/dashboard",
       redirect: true,
     });
+
     setIsLoading(false);
 
     if (res?.error) {
-      setIsLoading(false);
       setIsError(res.error);
+      return;
     }
+
+    setIsLoggedIn(true);
   };
 
   useEffect(() => {
     if (!isError) return;
     ErrorHandler(isError);
+    setIsError(undefined);
   }, [isError]);
 
   return (
-    <div className={styles.signInWrapper}>
+    <div
+      role="form"
+      aria-describedby="Sign up form"
+      className={styles.signInWrapper}
+    >
       <div className={styles.returnBtn}>
         <Link href={"/"}>
           <FaArrowLeft size={18} />
@@ -70,23 +84,25 @@ const SignInForm = () => {
       </div>
       <div className={styles.innerWrapper}>
         <div className={styles.header}>
-          <h2 className={styles.title}>
-            Sign In
-          </h2>
+          <h2 className={styles.title}>Sign In</h2>
         </div>
         <form
           onSubmit={handleSubmit(handleCredentialsSignIn)}
           className={styles.credentialsForm}
         >
           <input {...register("email")} name="email" placeholder="Email" />
-          {errors.email ? <span style={{color:'red'}}>{errors.email.message}</span>:null}
+          {errors.email ? (
+            <span style={{ color: "red" }}>{errors.email.message}</span>
+          ) : null}
           <input
             {...register("password")}
             name="password"
             placeholder="Password"
             type="password"
           />
-          {errors.password ? <span style={{color:'red'}}>{errors.password.message}</span>:null}
+          {errors.password ? (
+            <span style={{ color: "red" }}>{errors.password.message}</span>
+          ) : null}
           <div className={styles.submitBtn}>
             <Button
               theme="black"
@@ -96,12 +112,12 @@ const SignInForm = () => {
               type="submit"
               width={100}
               height={3}
-              disabled={isSubmitting}
+              disabled={isSubmitting || isLoggedIn}
             />
           </div>
         </form>
         <div className={styles.divderLine}>
-             <span>OR</span>
+          <span>OR</span>
         </div>
         <div className={styles.providersButtons}>
           <div className={styles.innerProvidersButtons}>
@@ -110,7 +126,7 @@ const SignInForm = () => {
               icon={<FaGithub color="red" />}
               theme="black"
               width={100}
-              disabled={isLoading}
+              disabled={isLoading || isLoggedIn}
               onClick={() => handleProvidersSignIn("github")}
             />
             <Button
@@ -118,7 +134,7 @@ const SignInForm = () => {
               theme="blue"
               icon={<FaGoogle color="red" />}
               width={100}
-              disabled={isLoading}
+              disabled={isLoading || isLoggedIn}
               onClick={() => handleProvidersSignIn("google")}
             />
           </div>

@@ -14,7 +14,10 @@ const FreeCounter = ({ counter = 0 }: freeCounterProps) => {
 
 
   return (
-    <div className={styles.freeCounter}>
+    <div 
+    role="banner"
+    aria-describedby="A section to count the amount of free uses remain"
+    className={styles.freeCounter}>
       <div className={styles.content}>
         Free uses : {counter}/{MAX_FREE_USES}
       </div>

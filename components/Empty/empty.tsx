@@ -9,7 +9,10 @@ type EmpryProps = {
 
 const Empty = ({message}:EmpryProps) => {
   return (
-    <div className={styles.emptyWrapper}>
+    <div 
+    role="banner"
+    aria-describedby="A banner that indicates of empty rendered items"
+    className={styles.emptyWrapper}>
       <Image
       style={{opacity:'0.7'}}
       width={250}

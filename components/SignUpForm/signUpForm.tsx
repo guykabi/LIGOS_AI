@@ -56,7 +56,10 @@ export const SignUpForm = () => {
   }
 
   return (
-    <div className={styles.signInMainWrapper}>
+    <div
+    role="form"
+    aria-describedby="Sign up form"
+     className={styles.signInMainWrapper}>
       <div className={styles["rightside-div"]}>
         <div className={styles["bg-image"]}></div>
         <div className={styles.sideText}>

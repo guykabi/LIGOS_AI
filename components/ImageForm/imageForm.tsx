@@ -111,7 +111,10 @@ const ImageForm = () => {
   return (
     <div className={styles.imageFormWrapper}>
       <form className={styles.form} onSubmit={handleSubmit(handleMessage)}>
-        <div className={styles.inputWrapper}>
+        <div
+         role="textbox" 
+         aria-describedby="Input of the image service"
+         className={styles.inputWrapper}>
           <input
             {...register("prompt")}
             name="prompt"

@@ -9,7 +9,10 @@ const UpgradeBtn = () => {
   const {onOpen} = usePremiumModal()
 
   return (
-    <div className={styles.upgradeBtn}>
+    <div 
+    role="button" 
+    aria-describedby="A button to upgrade to premium account"
+    className={styles.upgradeBtn}>
     <button onClick={onOpen}>
       UPGRADE 
       <p>

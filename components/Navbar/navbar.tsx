@@ -22,7 +22,12 @@ export const Navbar = ({freeUses}:NavbarProps) => {
   }
 
   return (
-    <div className={styles.navbar}>
+    <div 
+    className={styles.navbar}
+    role="presentation" 
+    aria-describedby="A  top navbarelement for the dashboard page"
+    >
+    
       <div className={styles.userDetails}>
         {session?.user?.image ?  
             <Image 

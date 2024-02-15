@@ -44,7 +44,7 @@ const Button = ({
   disabled={disabled}
   onClick={onClick}
   type={type}
-  role={role}
+  role={role || 'button'}
   aria-label={ariaLable}
   >
     {pending ? 'wait...' :text}
