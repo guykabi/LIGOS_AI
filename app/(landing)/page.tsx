@@ -1,5 +1,3 @@
-'use client'
-
 import React from 'react'
 import styles from './landing.module.scss'
 import Link from 'next/link'
@@ -8,17 +6,21 @@ import LOGO from '../../public/images/AI_LOGO.png'
 import Button from '@/components/Button/Button'
 import {FaArrowRight} from 'react-icons/fa'
 import {redirect} from 'next/navigation'
-import { useSession } from 'next-auth/react'
+import { getServerSession } from 'next-auth'
 
-function Landing() {
+async function Landing() {
 
+  const session =  await getServerSession()
 
-if (useSession().data?.user) {
+if (session?.user) {
     redirect('/dashboard')
 }
 
   return (
-    <div className={styles.main}>
+    <div
+      role="main"
+      aria-describedby="Ligos home page" 
+     className={styles.main}>
       
       <header className={styles.header}>
          <div className={styles.logo}>
