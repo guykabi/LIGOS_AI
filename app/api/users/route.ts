@@ -3,7 +3,7 @@ import connectDB from "../libs/mongodb";
 import User, { UserType } from "../libs/models/User";
 import bcrypt from "bcrypt";
 import { DetailsSchemaType } from "@/utils/types";
-import { handleServerSession } from "../utils";
+import { handleHashing, handleServerSession } from "../utils";
 import { uploadToCloudinary } from "../libs/cloudinary";
 
 export async function POST(req: NextRequest, res: NextResponse) {
@@ -93,6 +93,60 @@ export async function PUT(req: NextRequest, res: NextResponse) {
     });
 
     return NextResponse.json(updatedUser, { status: 200 });
+  } catch (err) {
+    return NextResponse.json({ message: "Error", err }, { status: 500 });
+  }
+}
+
+export async function PATCH(req: NextRequest, res: NextResponse) {
+  try {
+    await connectDB();
+    const body = await req.json();
+
+    if (!body?.password || !body?.token)
+      return NextResponse.json(
+        { message: "Password or token wasn't provided" },
+        { status: 400 }
+      );
+
+    const hashedToken = handleHashing(body.token);
+
+    const hashPassword = await bcrypt.hash(body.password, 10);
+    body.password = hashPassword;
+
+  
+    const newPassword = await User.findOneAndUpdate(
+      {
+        resetToken: hashedToken,
+        resetTokenExipry: { $gt: Date.now() },
+      },
+      {
+        password: body.password
+      },
+      { new: true }
+    );
+    
+    //If user try to reset the password after token expired
+    if (!newPassword) {
+      return NextResponse.json(
+        { message: "Unable to reset . Invalid token or expired" },
+        { status: 400 }
+      );
+    }
+
+    if (newPassword?.resetToken && newPassword.resetTokenExipry) {
+      newPassword.resetToken = undefined;
+      newPassword.resetTokenExipry = undefined;
+
+      await newPassword.save();
+    }
+
+    if (newPassword?.password) {
+      return NextResponse.json(
+        { message: "Password updated successfully" },
+        { status: 200 }
+      );
+    }
   } catch (err) {
     return NextResponse.json({ message: "Error", err }, { status: 500 });
   }
