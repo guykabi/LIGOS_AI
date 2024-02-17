@@ -7,7 +7,9 @@ export type UserType = {
   freeUses?:number,
   provider?:[string],
   premium?:boolean,
-  image?:string | undefined
+  image?:string | undefined,
+  resetToken?:string | undefined 
+  resetTokenExipry?:Date | number | undefined
 }
 
 interface UserSchemaType extends Document, UserType{}
@@ -22,7 +24,9 @@ const UserSchema:Schema = new Schema<UserSchemaType,UserModel>({
   freeUses:Number,
   provider:[String],
   premium:Boolean,
-  image:String
+  image:String,
+  resetToken:String,
+  resetTokenExipry:Date || Number
 },
 {timestamps:true}
 )
