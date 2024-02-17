@@ -13,6 +13,20 @@ export const signInSchema = z.object({
   password: z.string().min(10, "Password needs to be at list 10 characters"),
 });
 
+export const forgotPasswordSchema = z.object({
+  email: z.string().email()
+  })
+
+
+ export const resetSchema = z.object({
+  password: z.string().min(10, "Password needs to be at list 10 characters"),
+  confirmPassword: z.string(),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "Passwords must match",
+    path: ["confirmPassword"],
+  });
+
 export const signUpSchema = z
   .object({
     name: z
