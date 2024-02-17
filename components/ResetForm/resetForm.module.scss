@@ -1,6 +1,6 @@
 @import "../../public/assets/styles/variables.module.scss";
 
-.signInWrapper {
+.resetWrapper {
   position: relative;
   width: 100%;
   height: 100vh;
@@ -59,7 +59,7 @@
 
     }
 
-    .credentialsForm {
+    .resetForm {
       @media screen and (max-width: 880px) {
         width: 100%;
       }
@@ -106,66 +106,8 @@
           width: 80%;
         }
         margin: auto;
-      } 
-
-      .forgotPassword{
-        color: blue;
-        transition: 0.2s;
-      }
-
-      .forgotPassword:hover{
-        color:rgba(0, 0, 255, 0.429);
       }
     }
 
-    .divderLine {
-      @media screen and (max-width: 880px) {
-        width: 90%;
-      }
-
-      @media screen and (min-width: 880px) {
-        width: 50%;
-      }
-
-      span{
-        font-size: small;
-      }
-      text-align: center;
-      font-size: 16px;
-      background: linear-gradient(#000 0 0) left,
-        linear-gradient(#000 0 0) right;
-      background-size: 40% 1px;
-      background-repeat: no-repeat;
-    }
-
-    .providersButtons {
-      @media screen and (max-width: 880px) {
-        width: 100%;
-      }
-
-      @media screen and (min-width: 880px) {
-        width: 80%;
-      }
-
-      margin: 0 auto;
-
-      .innerProvidersButtons {
-        @media screen and (max-width: 880px) {
-          width: 100%;
-        }
-
-        @media screen and (min-width: 880px) {
-          width: 80%;
-        }
-        height: fit-content;
-        padding: 0.8rem;
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        justify-content: center;
-        align-items: center;
-        margin: auto;
-      }
-    }
   }
 }

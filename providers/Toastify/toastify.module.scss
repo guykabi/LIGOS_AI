@@ -5,13 +5,11 @@
   justify-content: center;
   text-align: center;
   font-weight: 600;
-  font-size: large;
+  font-size: 16px;
+  margin: auto;
 
   @media screen and (min-width: 1000px) {
-    width:600px;
+     width:max-content;
   }
 
-  @media screen and (max-width: 1000px) {
-    width:300px;
-  }
 }
