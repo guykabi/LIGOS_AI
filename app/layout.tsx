@@ -20,7 +20,10 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   title: "LIGOS AI",
-  description: "Multiple AI services in one place"
+  description: "Multiple AI services in one place",
+  openGraph: {
+    images: '/opengraph-image.png',
+  },
 };
 
 export default async function RootLayout({
