@@ -74,7 +74,7 @@ const SignInForm = () => {
   return (
     <div
       role="form"
-      aria-describedby="Sign up form"
+      aria-describedby="Sign In form"
       className={styles.signInWrapper}
     >
       <div className={styles.returnBtn}>
@@ -114,6 +114,9 @@ const SignInForm = () => {
               height={3}
               disabled={isSubmitting || isLoggedIn}
             />
+          </div>
+          <div className={styles.forgotPassword}>
+            <Link href={'/forgot-password'}>Forgot Password? </Link>
           </div>
         </form>
         <div className={styles.divderLine}>
