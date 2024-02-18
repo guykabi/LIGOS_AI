@@ -5,7 +5,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import connectDB from "../../libs/mongodb";
 import User from "../../libs/models/User";
 import {User as UserType} from '../../../../utils/types'
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import Axios from "../../api-instance";
 import { AxiosRequestConfig } from "axios";
 

@@ -1,7 +1,7 @@
 import { NextResponse, NextRequest } from "next/server";
 import connectDB from "../libs/mongodb";
 import User, { UserType } from "../libs/models/User";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { DetailsSchemaType } from "@/utils/types";
 import { handleHashing, handleServerSession } from "../utils";
 import { uploadToCloudinary } from "../libs/cloudinary";
