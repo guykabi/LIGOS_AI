@@ -16,7 +16,7 @@ import { SpinnerLoader } from "../SpinnerLoader.tsx/spinnerLoader";
 
 const SignInForm = () => {
   const [isError, setIsError] = useState<string | undefined>();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState<{ provider: string } | null>();
   //Preventing a after click on one of the submit buttons
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const { push } = useRouter();
@@ -27,7 +27,7 @@ const SignInForm = () => {
     formState: { isSubmitting, errors },
     reset,
   } = useForm<signInSchemaType>({
-    resolver: zodResolver(signInSchema)
+    resolver: zodResolver(signInSchema),
   });
 
   const handleCredentialsSignIn = async ({ email, password }: FieldValues) => {
@@ -48,14 +48,14 @@ const SignInForm = () => {
   };
 
   const handleProvidersSignIn = async (provider: string) => {
-    setIsLoading(true);
+    setIsLoading({ provider });
 
     const res = await signIn(provider, {
       callbackUrl: "/dashboard",
       redirect: true,
     });
 
-    setIsLoading(false);
+    setIsLoading(null);
 
     if (res?.error) {
       setIsError(res.error);
@@ -112,11 +112,16 @@ const SignInForm = () => {
               type="submit"
               width={100}
               height={3}
-              disabled={isSubmitting || isLoggedIn}
+              disabled={
+                isSubmitting ||
+                isLoggedIn ||
+                isLoading?.provider === "google" ||
+                isLoading?.provider === "github"
+              }
             />
           </div>
           <div className={styles.forgotPassword}>
-            <Link href={'/forgot-password'}>Forgot Password? </Link>
+            <Link href={"/forgot-password"}>Forgot Password? </Link>
           </div>
         </form>
         <div className={styles.divderLine}>
@@ -125,19 +130,25 @@ const SignInForm = () => {
         <div className={styles.providersButtons}>
           <div className={styles.innerProvidersButtons}>
             <Button
-              text="Github"
-              icon={<FaGithub color="red" />}
+              text={
+                isLoading?.provider === "github" ? <SpinnerLoader size={20} /> : "Github"
+              }
+              icon={
+                isLoading?.provider !== "github" && <FaGithub color="red" />
+              }
               theme="black"
               width={100}
-              disabled={isLoading || isLoggedIn}
+              disabled={isLoading?.provider === "google" || isLoggedIn}
               onClick={() => handleProvidersSignIn("github")}
             />
             <Button
-              text="Google"
+              text={
+                isLoading?.provider === "google" ? <SpinnerLoader size={20} /> : "Google"
+              }
               theme="blue"
-              icon={<FaGoogle color="red" />}
+              icon={isLoading?.provider !== "google" && <FaGoogle color="green" />}
               width={100}
-              disabled={isLoading || isLoggedIn}
+              disabled={isLoading?.provider === "github" || isLoggedIn}
               onClick={() => handleProvidersSignIn("google")}
             />
           </div>
