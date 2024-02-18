@@ -1,12 +1,18 @@
 version: "3.8"
 services:
   ligos:
-    container_name: ligos
+    container_name: ligos_prod
     build: .
     image: ligos_prod
-    restart: unless-stopped
+    restart: always
+    networks:
+      - ligos
+    ports:
+      - "3000:3000"
     env_file: .env.local
     environment:
       - NODE_ENV=production
-    ports:
-      - "3000:3000"
+
+networks:
+  ligos:
+    driver: bridge
