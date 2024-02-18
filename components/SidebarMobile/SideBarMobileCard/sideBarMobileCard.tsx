@@ -50,7 +50,7 @@ const SideBarMobileCard = ({ route, path }: SideBarMobileCardProps) => {
           }
         >
           <div className={styles.routeLabel}>
-            <p>{route.icon ? <route.icon /> : null}</p>
+            <p>{route.icon ? <route.icon size={20} /> : null}</p>
           </div>
         </Link>
       </div>
@@ -63,9 +63,9 @@ const SideBarMobileCard = ({ route, path }: SideBarMobileCardProps) => {
           onClick={() => setIsPreviousQuestions((prev) => !prev)}
         >
           {isPreviousQuestions ? (
-            <MdKeyboardArrowLeft size={20} />
+            <MdKeyboardArrowLeft size={24} />
           ) : (
-            <MdKeyboardArrowRight size={20} />
+            <MdKeyboardArrowRight size={24} />
           )}
         </div>
       ) : null}
