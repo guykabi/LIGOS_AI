@@ -28,6 +28,7 @@
     position: absolute;
     z-index: 10;
     margin-left: 100%;
+    padding-left: 4px;
     color: white;
   }
 
@@ -38,20 +39,20 @@
   .previousQuestions {
     position: absolute;
     z-index: 10;
-    width: 400%;
-    margin-left: 600%;
+    width: 700%;
+    margin-left: 900%;
     display: flex;
     flex-direction: column;
     gap: 4px;
-    padding: 4px;
-    max-height: 7rem;
+    padding: 6px 10px 10px 10px;
+    max-height: 12rem;
     overflow-y: scroll;
     border-radius: 0.4em;
     background-color: $primary-background;
 
     div {
       width: 100%;
-      padding: 0.4rem;
+      padding: 0.8rem;
       border-radius: 0.4em;
       transition: 0.4s;
       font-weight: 500;
