@@ -1,4 +1,4 @@
-FROM node:16-alpine3.16 AS deps
+FROM node:19.9.0-alpine AS deps
 
 
 # RUN apk add --no-cache libc6-compat
@@ -9,7 +9,7 @@ RUN npm install --frozwn-lockfile
 
 # END DEPS IMAGE
 
-FROM node:16-alpine3.16 AS BUILD_IMAGE
+FROM node:19.9.0-alpine AS BUILD_IMAGE
 
 WORKDIR /app
 
@@ -25,7 +25,7 @@ RUN npm install --production --frozen-lockfile --ignore-scripts --prefer-offline
 # END OF BUILD_IMAGE
 
 # This starts our application's run image - the final output of build.
-FROM node:16-alpine3.16
+FROM node:19.9.0-alpine
 
 ENV NODE_ENV production
 
