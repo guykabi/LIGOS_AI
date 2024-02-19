@@ -9,32 +9,33 @@ cloudinary.config({
 export const uploadToCloudinary = async (file: File) => {
   try {
     if (!file) return;
-    const arrayBuffer = await file.arrayBuffer();
-    const buffer = new Uint8Array(arrayBuffer);
+    const fileBuffer = await file.arrayBuffer();
 
-    return new Promise<{
-      url: string | undefined;
-      cloudinary_id: string | undefined;
-    }>((resolve, reject) => {
-      cloudinary.uploader
-        .upload_stream({}, (error, data) => {
-          if (error) return reject(error.message);
-          return resolve({ url: data?.url, cloudinary_id: data?.public_id });
-        })
-        .end(buffer);
-    });
+    let mime = file.type;
+    let encoding = "base64";
+    let base64Data = Buffer.from(fileBuffer).toString("base64");
+    let fileUri = "data:" + mime + ";" + encoding + "," + base64Data;
+
+    const uploadToCloudinary = () => {
+      return new Promise<{
+        url: string | undefined;
+        cloudinary_id: string | undefined;
+      }>((resolve, reject) => {
+        cloudinary.uploader
+          .upload(fileUri, {
+            invalidate: true,
+          })
+          .then((result) => {
+            resolve({ url: result?.url, cloudinary_id: result?.public_id });
+          })
+          .catch((error) => {
+            reject(error);
+          });
+      });
+    };
+
+    return await uploadToCloudinary();
   } catch (error) {
-    throw new Error("Unable to upload image");
+    return "Unable to upload image";
   }
 };
-
-// export const removeFromCloudinary = async (public_id: string) => {
-//   let type = public_id.includes("video");
-//   await cloudinary.v2.uploader.destroy(
-//     public_id,
-//     { resource_type: type ? "video" : "image" },
-//     () => {
-//       return "Removed successfully";
-//     }
-//   );
-// };

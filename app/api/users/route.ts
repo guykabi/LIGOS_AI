@@ -3,7 +3,7 @@ import connectDB from "../libs/mongodb";
 import User, { UserType } from "../libs/models/User";
 import bcrypt from "bcryptjs";
 import { DetailsSchemaType } from "@/utils/types";
-import { handleHashing, handleServerSession } from "../utils";
+import { handleHashing, handleServerSession } from "../utils"
 import { uploadToCloudinary } from "../libs/cloudinary";
 
 export async function POST(req: NextRequest, res: NextResponse) {
@@ -79,10 +79,16 @@ export async function PUT(req: NextRequest, res: NextResponse) {
 
     if (image) {
       const cloudinary = await uploadToCloudinary(image);
+
+      if (cloudinary === "Unable to upload image") {
+        return NextResponse.json({ message: cloudinary }, { status: 400 });
+      }
+      
       let body: DetailsSchemaType = { name, email, image: cloudinary?.url };
       const updatedUser = await User.findByIdAndUpdate(session?.user.id, body, {
         new: true,
       });
+
       return NextResponse.json(updatedUser, { status: 200 });
     }
 
@@ -114,18 +120,17 @@ export async function PATCH(req: NextRequest, res: NextResponse) {
     const hashPassword = await bcrypt.hash(body.password, 10);
     body.password = hashPassword;
 
-  
     const newPassword = await User.findOneAndUpdate(
       {
         resetToken: hashedToken,
         resetTokenExipry: { $gt: Date.now() },
       },
       {
-        password: body.password
+        password: body.password,
       },
       { new: true }
     );
-    
+
     //If user try to reset the password after token expired
     if (!newPassword) {
       return NextResponse.json(
