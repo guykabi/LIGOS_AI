@@ -1,7 +1,9 @@
 import mongoose from "mongoose";
 
+const DATABASE_URL = process.env.MONGODB_URI;
 
-if (!process.env.MONGODB_URI) {
+
+if (!DATABASE_URL) {
   throw new Error("Please define the DATABASE_URL environment variable inside .env.local");
 }
 
@@ -14,7 +16,7 @@ async function connectDB() {
   }
 
   /* connecting to our database */
-  const db = await mongoose.connect(process.env.MONGODB_URI)
+  const db = await mongoose.connect(DATABASE_URL)
 
   connection.isConnected = db.connections[0].readyState
 }
