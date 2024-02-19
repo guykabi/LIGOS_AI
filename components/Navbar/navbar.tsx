@@ -35,6 +35,8 @@ export const Navbar = ({freeUses}:NavbarProps) => {
             src={session.user.image} 
             width={20} 
             height={20}
+            placeholder="blur"
+            blurDataURL={process.env.NEXT_PUBLIC_IMAGE_BLUR}
             style={{borderRadius:'50%'}}
              />:
             <RxAvatar size={20}/>}
