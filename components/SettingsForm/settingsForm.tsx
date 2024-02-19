@@ -17,6 +17,7 @@ import useMediaQuery from "@mui/material/useMediaQuery";
 import { TiDelete } from "react-icons/ti";
 import { useSendSettings } from "@/hooks/useSendSettings";
 import { SpinnerLoader } from "../SpinnerLoader.tsx/spinnerLoader";
+import { ErrorHandler } from "@/utils/errorHandler";
 
 const SettingsForm = () => {
   const { data: session, update } = useSession();
@@ -28,6 +29,8 @@ const SettingsForm = () => {
     data: newDetails,
     isLoading,
     isSuccess,
+    isError,
+    error
   } = useSendSettings();
 
   const {
@@ -55,7 +58,6 @@ const SettingsForm = () => {
         formData.append(key, data[key as keyof DetailsSchemaType]);
       }
       sendDetails(formData);
-      setPreviewImage(null);
     } else {
       delete data.image;
       for (let key in data) {
@@ -72,10 +74,19 @@ const SettingsForm = () => {
 
   useEffect(() => {
     if (!newDetails) return;
-
+   
     reset();
+    setPreviewImage(null);
     update({ name: newDetails?.name, image: newDetails?.image });
   }, [isSuccess]);
+
+
+  useEffect(()=>{
+    if(!error) return 
+
+    reset()
+    ErrorHandler(error)
+  },[isError,error])
 
   return (
     <div className={styles.settingsWrapper}>
@@ -105,7 +116,9 @@ const SettingsForm = () => {
             <Image
               alt="user image"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              priority={true}
+              priority
+              placeholder="blur"
+              blurDataURL={process.env.NEXT_PUBLIC_IMAGE_BLUR}
               src={
                 previewImage
                   ? previewImage
