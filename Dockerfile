@@ -27,8 +27,7 @@ RUN npm install --production --frozen-lockfile --ignore-scripts --prefer-offline
 # This starts our application's run image - the final output of build.
 FROM node:16-alpine3.16
 
-ENV NODE_ENV production
-
+RUN NODE_ENV=development npm i
 
 RUN addgroup -g 1001 -S nodejs
 RUN adduser -S nextjs -u 1001
