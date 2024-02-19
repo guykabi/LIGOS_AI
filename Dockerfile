@@ -16,6 +16,8 @@ WORKDIR /app
 # server for production
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+
+ENV NODE_ENV production
 RUN npm run build
 
 # Remove all the development dependencies
@@ -26,8 +28,6 @@ RUN npm install --production --frozen-lockfile --ignore-scripts --prefer-offline
 
 # This starts our application's run image - the final output of build.
 FROM node:16-alpine3.16
-
-ENV NODE_ENV production
 
 
 RUN addgroup -g 1001 -S nodejs
