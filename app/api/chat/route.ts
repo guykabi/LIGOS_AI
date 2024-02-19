@@ -9,7 +9,7 @@ import connectDB from "../libs/mongodb";
 import { checkFreeLimit, freeTrialIncrease } from "../libs/apiLimit";
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY! || "",
+  apiKey: process.env.OPENAI_API_KEY,
 });
 
 export async function POST(req: NextRequest, res: NextResponse) {
