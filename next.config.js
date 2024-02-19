@@ -13,6 +13,7 @@ const nextConfig = {
     domains: ["**", "res.cloudinary.com"],
     formats: ['image/avif', 'image/webp'],
   },
+  staticPageGenerationTimeout:1000
 }
 
 module.exports = nextConfig
