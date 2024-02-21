@@ -9,7 +9,10 @@ import bcrypt from "bcryptjs";
 import Axios from "../../api-instance";
 import { AxiosRequestConfig } from "axios";
 
+
 export const authOptions: NextAuthOptions = {
+  secret: process.env.NEXTAUTH_SECRET,
+
   providers: [
     CredentialsProvider({
       name: "Credentials",
